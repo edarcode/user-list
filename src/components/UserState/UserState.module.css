@@ -1,0 +1,11 @@
+.state {
+	text-transform: capitalize;
+}
+
+.active {
+	color: green;
+}
+
+.inactive {
+	color: red;
+}
