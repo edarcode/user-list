@@ -13,10 +13,11 @@ export default function App() {
 		setIsCheckedActive,
 		setSortBy
 	} = useFormUserList();
+	const { users, toggleStateUser } = useUsers(USERS);
 
-	let users = filterUsersByState(USERS, isCheckedActive);
-	users = filterUsersByName(users, userToSearch);
-	users = sortUsersBy(users, sortBy);
+	let usersFiltered = filterUsersByState(users, isCheckedActive);
+	usersFiltered = filterUsersByName(usersFiltered, userToSearch);
+	usersFiltered = sortUsersBy(usersFiltered, sortBy);
 
 	return (
 		<section className={css.app}>
@@ -29,7 +30,7 @@ export default function App() {
 				setIsCheckedActive={setIsCheckedActive}
 				setSortBy={setSortBy}
 			/>
-			<UserList users={users} />
+			<UserList users={usersFiltered} toggleStateUser={toggleStateUser} />
 		</section>
 	);
 }
@@ -52,6 +53,22 @@ const useFormUserList = () => {
 	};
 
 	return { ...formUserList, setUserToSearch, setIsCheckedActive, setSortBy };
+};
+
+const useUsers = initialUsers => {
+	const [users, setUsers] = useState(initialUsers);
+
+	const toggleStateUser = id => {
+		const indexUser = users.findIndex(user => user.id === id);
+		if (indexUser === -1) return;
+
+		const newUsers = [...users];
+		const user = newUsers[indexUser];
+		user.state = !user.state;
+		setUsers(newUsers);
+	};
+
+	return { users, toggleStateUser };
 };
 
 const filterUsersByName = (users, name) => {
