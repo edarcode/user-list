@@ -5,27 +5,54 @@ import UserList from "../UserList/UserList.jsx";
 import css from "./App.module.css";
 
 export default function App() {
+	const {
+		userToSearch,
+		isCheckedActive,
+		sortBy,
+		setUserToSearch,
+		setIsCheckedActive,
+		setSortBy
+	} = useFormUserList();
+
+	let users = filterUsersByState(USERS, isCheckedActive);
+	users = filterUsersByName(users, userToSearch);
+	users = sortUsersBy(users, sortBy);
+
+	return (
+		<section className={css.app}>
+			<h1>Listado de usuarios</h1>
+			<FormUserList
+				userToSearch={userToSearch}
+				isCheckedActive={isCheckedActive}
+				sortBy={sortBy}
+				setUserToSearch={setUserToSearch}
+				setIsCheckedActive={setIsCheckedActive}
+				setSortBy={setSortBy}
+			/>
+			<UserList users={users} />
+		</section>
+	);
+}
+
+const useFormUserList = () => {
 	const [formUserList, setFormUserList] = useState({
 		userToSearch: "",
 		isCheckedActive: false,
 		sortBy: "0"
 	});
 
-	let users = filterUsersByState(USERS, formUserList.isCheckedActive);
-	users = filterUsersByName(users, formUserList.userToSearch);
-	users = sortUsersBy(users, formUserList.sortBy);
+	const setUserToSearch = newUserToSearch => {
+		setFormUserList({ ...formUserList, userToSearch: newUserToSearch });
+	};
+	const setIsCheckedActive = newIsCheckedActive => {
+		setFormUserList({ ...formUserList, isCheckedActive: newIsCheckedActive });
+	};
+	const setSortBy = newSortBy => {
+		setFormUserList({ ...formUserList, sortBy: newSortBy });
+	};
 
-	return (
-		<section className={css.app}>
-			<h1>Listado de usuarios</h1>
-			<FormUserList
-				formUserList={formUserList}
-				setFormUserList={setFormUserList}
-			/>
-			<UserList users={users} />
-		</section>
-	);
-}
+	return { ...formUserList, setUserToSearch, setIsCheckedActive, setSortBy };
+};
 
 const filterUsersByName = (users, name) => {
 	if (!name) return users;
