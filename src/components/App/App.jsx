@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { USERS } from "../../constants/users.js";
+import { UsersContext } from "../../contexts/UsersContext.js";
 import FormUserList from "../FormUserList/FormUserList.jsx";
 import UserList from "../UserList/UserList.jsx";
 import css from "./App.module.css";
@@ -30,7 +31,9 @@ export default function App() {
 				setIsCheckedActive={setIsCheckedActive}
 				setSortBy={setSortBy}
 			/>
-			<UserList users={usersFiltered} toggleStateUser={toggleStateUser} />
+			<UsersContext.Provider value={{ toggleStateUser }}>
+				<UserList users={usersFiltered} />
+			</UsersContext.Provider>
 		</section>
 	);
 }
@@ -75,10 +78,12 @@ const filterUsersByName = (users, name) => {
 	if (!name) return users;
 	return users.filter(user => user.name.includes(name));
 };
+
 const filterUsersByState = (users, state) => {
 	if (!state) return users;
 	return users.filter(user => user.state);
 };
+
 const sortUsersBy = (users, sortBy) => {
 	switch (sortBy) {
 		case "1":
@@ -88,6 +93,7 @@ const sortUsersBy = (users, sortBy) => {
 			return users;
 	}
 };
+
 const sortUsersByName = users => {
 	return users.toSorted((a, b) => {
 		if (a.name > b.name) return 1;
