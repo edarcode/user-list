@@ -1,11 +1,17 @@
 .state {
 	text-transform: capitalize;
+	display: flex;
+	align-items: center;
+}
+
+.state svg {
+	width: 20px;
 }
 
 .active {
-	color: green;
+	color: var(--c-green);
 }
 
 .inactive {
-	color: red;
+	color: var(--c-red);
 }
