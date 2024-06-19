@@ -1,1 +1,5 @@
 @import "./styles/reset.css";
+@import "./styles/colors.css";
+@import "./styles/shadows.css";
+@import "./styles/radius.css";
+@import "./styles/fonts.css";
