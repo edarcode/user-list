@@ -1,3 +1,4 @@
+import { SORT_BY } from "../../constants/sortBy.js";
 import css from "./FormUserList.module.css";
 
 export default function FormUserList({
@@ -27,8 +28,10 @@ export default function FormUserList({
 				value={sortBy}
 				onChange={e => setSortBy(e.target.value)}
 			>
-				<option value="0">defecto</option>
-				<option value="1">nombre</option>
+				<option value={SORT_BY.default}>defecto</option>
+				<option value={SORT_BY.name}>nombre</option>
+				<option value={SORT_BY.role}>role</option>
+				<option value={SORT_BY.state}>estado</option>
 			</select>
 		</form>
 	);

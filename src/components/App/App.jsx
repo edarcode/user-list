@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SORT_BY } from "../../constants/sortBy.js";
 import { USERS } from "../../constants/users.js";
 import FormUserList from "../FormUserList/FormUserList.jsx";
 import UserList from "../UserList/UserList.jsx";
@@ -73,19 +74,10 @@ const filterUsersByState = (users, state) => {
 };
 
 const sortUsersBy = (users, sortBy) => {
-	switch (sortBy) {
-		case "1":
-			return sortUsersByName(users);
-
-		default:
-			return users;
-	}
-};
-
-const sortUsersByName = users => {
+	if (sortBy === SORT_BY.default) return users;
 	return users.toSorted((a, b) => {
-		if (a.name > b.name) return 1;
-		else if (a.name < b.name) return -1;
+		if (a[sortBy] > b[sortBy]) return 1;
+		else if (a[sortBy] < b[sortBy]) return -1;
 		return 0;
 	});
 };
