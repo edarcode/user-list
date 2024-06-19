@@ -9,9 +9,14 @@
 	min-width: 0;
 }
 
+html {
+	font-size: 62.5%;
+}
+
 body {
 	-webkit-font-smoothing: antialiased;
 	min-height: 100dvh;
+	font-size: 1.6rem;
 }
 
 img,

@@ -21,6 +21,6 @@ export const USERS = [
 		id: 4,
 		name: "caro rivero",
 		state: false,
-		role: "estudiante"
+		role: "otro"
 	}
 ];

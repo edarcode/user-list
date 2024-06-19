@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { USERS } from "../../constants/users.js";
-import { UsersContext } from "../../contexts/UsersContext.js";
 import FormUserList from "../FormUserList/FormUserList.jsx";
 import UserList from "../UserList/UserList.jsx";
 import css from "./App.module.css";
@@ -14,7 +13,7 @@ export default function App() {
 		setIsCheckedActive,
 		setSortBy
 	} = useFormUserList();
-	const { users, toggleStateUser } = useUsers(USERS);
+	const { users } = useUsers(USERS);
 
 	let usersFiltered = filterUsersByState(users, isCheckedActive);
 	usersFiltered = filterUsersByName(usersFiltered, userToSearch);
@@ -31,9 +30,8 @@ export default function App() {
 				setIsCheckedActive={setIsCheckedActive}
 				setSortBy={setSortBy}
 			/>
-			<UsersContext.Provider value={{ toggleStateUser }}>
-				<UserList users={usersFiltered} />
-			</UsersContext.Provider>
+
+			<UserList users={usersFiltered} />
 		</section>
 	);
 }
@@ -61,17 +59,7 @@ const useFormUserList = () => {
 const useUsers = initialUsers => {
 	const [users, setUsers] = useState(initialUsers);
 
-	const toggleStateUser = id => {
-		const indexUser = users.findIndex(user => user.id === id);
-		if (indexUser === -1) return;
-
-		const newUsers = [...users];
-		const user = newUsers[indexUser];
-		user.state = !user.state;
-		setUsers(newUsers);
-	};
-
-	return { users, toggleStateUser };
+	return { users, setUsers };
 };
 
 const filterUsersByName = (users, name) => {
