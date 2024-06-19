@@ -1,4 +1,4 @@
-import css from "./UserRole.module.css";
+import css from "./css.module.css";
 
 const ROLES = {
 	profesor: css.teacher,

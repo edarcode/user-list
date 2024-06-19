@@ -1,7 +1,7 @@
 import { ACTIVE, INACTIVE } from "../../constants/states.js";
 import CheckCircle from "../icons/CheckCircle.jsx";
 import CrossCircle from "../icons/CrossCircle.jsx";
-import css from "./UserState.module.css";
+import css from "./css.module.css";
 
 export default function UserState({ state }) {
 	const classState = state ? css.active : css.inactive;

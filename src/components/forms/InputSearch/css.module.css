@@ -1,0 +1,29 @@
+.label {
+	position: relative;
+}
+
+.input {
+	border: none;
+	outline: transparent;
+	box-shadow: var(--s-sm);
+	border-radius: var(--r-sm);
+	padding: var(--p-md) 40px;
+	width: 100%;
+}
+
+.input:focus {
+	box-shadow: var(--s-md);
+}
+
+.input::placeholder {
+	color: var(--c-lightgray);
+}
+
+.icon {
+	position: absolute;
+	top: 50%;
+	bottom: 50%;
+	transform: translate(var(--p-md), -50%);
+	color: var(--c-lightgray);
+	width: 22px;
+}

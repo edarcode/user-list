@@ -1,5 +1,7 @@
 import { SORT_BY } from "../../constants/sortBy.js";
-import css from "./FormUserList.module.css";
+import InputSearch from "../forms/InputSearch/InputSearch.jsx";
+
+import css from "./css.module.css";
 
 export default function FormUserList({
 	userToSearch,
@@ -11,7 +13,8 @@ export default function FormUserList({
 }) {
 	return (
 		<form className={css.form}>
-			<input
+			<InputSearch
+				placeholder="Nombre"
 				value={userToSearch}
 				onChange={e => setUserToSearch(e.target.value)}
 			/>

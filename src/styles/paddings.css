@@ -1,4 +1,5 @@
 :root {
-	--p-v: 4px;
-	--p-h: 8px;
+	--p-sm: 4px;
+	--p-md: 8px;
+	--p-lg: 16px;
 }

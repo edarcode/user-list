@@ -1,5 +1,5 @@
 import User from "../User/User.jsx";
-import css from "./UserList.module.css";
+import css from "./css.module.css";
 const UserList = ({ users }) => {
 	if (users.length <= 0) return <p>No hay asuarios</p>;
 

@@ -2,7 +2,7 @@
 	background-color: royalblue;
 	text-transform: uppercase;
 	font-size: var(--t-sm);
-	padding: var(--p-v) var(--p-h);
+	padding: var(--p-sm) var(--p-md);
 	text-align: center;
 	border-radius: var(--r-sm);
 }

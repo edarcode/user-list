@@ -1,4 +1,4 @@
-import css from "./UserProfile.module.css";
+import css from "./css.module.css";
 
 export default function UserProfile({ name, username }) {
 	return (
