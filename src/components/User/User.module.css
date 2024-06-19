@@ -3,14 +3,10 @@
 	grid-template-columns: 1fr 20% 20% 20%;
 	gap: 10px;
 	align-items: center;
-	border: 1px solid gray;
+	box-shadow: var(--s-sm);
 	padding: 15px;
 	margin-bottom: 15px;
-	border-radius: 10px;
-}
-
-.user__name {
-	font-weight: bold;
+	border-radius: var(--r-md);
 }
 
 .name {

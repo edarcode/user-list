@@ -1,0 +1,8 @@
+.name {
+	font-weight: bold;
+	text-transform: capitalize;
+}
+.username {
+	color: var(--c-gray);
+	font-size: var(--t-sm);
+}
