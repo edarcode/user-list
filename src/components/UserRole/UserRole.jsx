@@ -1,12 +1,14 @@
+import { ROLES } from "../../constants/roles.js";
 import css from "./css.module.css";
 
-const ROLES = {
-	profesor: css.teacher,
-	estudiante: css.student
+const ROLES_STYLES = {
+	[ROLES.teacher]: css.teacher,
+	[ROLES.student]: css.student,
+	[ROLES.other]: css.other
 };
 
 const UserRole = ({ role }) => {
-	const classNameRole = ROLES[role] || css.other;
+	const classNameRole = ROLES_STYLES[role];
 	return <p className={`${css.role} ${classNameRole}`}>{role}</p>;
 };
 

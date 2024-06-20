@@ -41,7 +41,7 @@ const useFormUserList = () => {
 	const [formUserList, setFormUserList] = useState({
 		userToSearch: "",
 		isCheckedActive: false,
-		sortBy: "0"
+		sortBy: SORT_BY.default
 	});
 
 	const setUserToSearch = newUserToSearch => {
