@@ -1,6 +1,7 @@
 import { SORT_BY } from "../../constants/sortBy.js";
 import InputCheckbox from "../forms/InputCheckbox/InputCheckbox.jsx";
 import InputSearch from "../forms/InputSearch/InputSearch.jsx";
+import Select from "../forms/Select/Select.jsx";
 
 import css from "./css.module.css";
 
@@ -25,7 +26,7 @@ export default function FormUserList({
 				onChange={e => setIsCheckedActive(e.target.checked)}
 			/>
 
-			<select
+			<Select
 				className={css.order}
 				value={sortBy}
 				onChange={e => setSortBy(e.target.value)}
@@ -34,7 +35,7 @@ export default function FormUserList({
 				<option value={SORT_BY.name}>nombre</option>
 				<option value={SORT_BY.role}>role</option>
 				<option value={SORT_BY.state}>estado</option>
-			</select>
+			</Select>
 		</form>
 	);
 }
