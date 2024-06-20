@@ -26,4 +26,5 @@
 	transform: translate(var(--p-md), -50%);
 	color: var(--c-lightgray);
 	width: 22px;
+	cursor: text;
 }

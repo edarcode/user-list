@@ -1,4 +1,5 @@
 import { SORT_BY } from "../../constants/sortBy.js";
+import InputCheckbox from "../forms/InputCheckbox/InputCheckbox.jsx";
 import InputSearch from "../forms/InputSearch/InputSearch.jsx";
 
 import css from "./css.module.css";
@@ -18,14 +19,12 @@ export default function FormUserList({
 				value={userToSearch}
 				onChange={e => setUserToSearch(e.target.value)}
 			/>
-			<label className={css.active}>
-				<input
-					type="checkbox"
-					checked={isCheckedActive}
-					onChange={e => setIsCheckedActive(e.target.checked)}
-				/>
-				activos
-			</label>
+			<InputCheckbox
+				text="activos"
+				checked={isCheckedActive}
+				onChange={e => setIsCheckedActive(e.target.checked)}
+			/>
+
 			<select
 				className={css.order}
 				value={sortBy}

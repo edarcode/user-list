@@ -1,0 +1,25 @@
+.label {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+}
+
+.checkbox {
+	opacity: 0;
+	position: absolute;
+}
+
+.fakeCheckbox {
+	box-shadow: var(--s-sm);
+	border-radius: var(--r-sm);
+}
+
+.checkbox:not(:checked) + .fakeCheckbox > .icon {
+	opacity: 0;
+}
+
+.checkbox:focus + .fakeCheckbox {
+	box-shadow: var(--s-md);
+}

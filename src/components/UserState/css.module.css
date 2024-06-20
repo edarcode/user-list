@@ -1,6 +1,7 @@
 .state {
 	text-transform: capitalize;
 	display: flex;
+	gap: 3px;
 	align-items: center;
 }
 

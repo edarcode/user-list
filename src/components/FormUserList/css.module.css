@@ -3,8 +3,3 @@
 	grid-template-columns: 1fr auto auto;
 	gap: 10px;
 }
-.active {
-	display: flex;
-	align-items: center;
-	gap: 5px;
-}
