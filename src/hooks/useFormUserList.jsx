@@ -5,7 +5,9 @@ export const useFormUserList = () => {
 	const [formUserList, setFormUserList] = useState({
 		userToSearch: "",
 		isCheckedActive: false,
-		sortBy: SORT_BY.default
+		sortBy: SORT_BY.default,
+		page: 1,
+		usersPerPage: 2
 	});
 
 	const setUserToSearch = newUserToSearch => {
@@ -17,6 +19,19 @@ export const useFormUserList = () => {
 	const setSortBy = newSortBy => {
 		setFormUserList({ ...formUserList, sortBy: newSortBy });
 	};
+	const setPage = newPage => {
+		setFormUserList({ ...formUserList, page: newPage });
+	};
+	const setUsersPerPage = newUsersPerPage => {
+		setFormUserList({ ...formUserList, usersPerPage: newUsersPerPage });
+	};
 
-	return { ...formUserList, setUserToSearch, setIsCheckedActive, setSortBy };
+	return {
+		...formUserList,
+		setUserToSearch,
+		setIsCheckedActive,
+		setSortBy,
+		setPage,
+		setUsersPerPage
+	};
 };

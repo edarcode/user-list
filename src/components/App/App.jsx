@@ -1,11 +1,9 @@
 import { USERS } from "../../constants/users.js";
 import { useFormUserList } from "../../hooks/useFormUserList.jsx";
 import { useUsers } from "../../hooks/useUsers.jsx";
-import { filterUsersByName } from "../../utils/filterUsersByName.js";
-import { filterUsersByState } from "../../utils/filterUsersByState.js";
-import { sortUsersBy } from "../../utils/sortUsersBy.js";
-import FormUserList from "../FormUserList/FormUserList.jsx";
 import UserList from "../UserList/UserList.jsx";
+import UserListForm from "../UserListForm/UserListForm.jsx";
+import UserListPaginationForm from "../UserListPaginationForm/UserListPaginationForm.jsx";
 import css from "./App.module.css";
 
 export default function App() {
@@ -13,20 +11,26 @@ export default function App() {
 		userToSearch,
 		isCheckedActive,
 		sortBy,
+
+		usersPerPage,
 		setUserToSearch,
 		setIsCheckedActive,
-		setSortBy
+		setSortBy,
+		setPage,
+		setUsersPerPage
 	} = useFormUserList();
-	const { users } = useUsers(USERS);
 
-	let usersFiltered = filterUsersByState(users, isCheckedActive);
-	usersFiltered = filterUsersByName(usersFiltered, userToSearch);
-	usersFiltered = sortUsersBy(usersFiltered, sortBy);
+	const { users } = useUsers(USERS, {
+		isCheckedActive,
+		userToSearch,
+		sortBy,
+		usersPerPage
+	});
 
 	return (
 		<section className={css.app}>
 			<h1 className={css.title}>Listado de usuarios</h1>
-			<FormUserList
+			<UserListForm
 				userToSearch={userToSearch}
 				isCheckedActive={isCheckedActive}
 				sortBy={sortBy}
@@ -34,8 +38,12 @@ export default function App() {
 				setIsCheckedActive={setIsCheckedActive}
 				setSortBy={setSortBy}
 			/>
-
-			<UserList users={usersFiltered} />
+			<UserList users={users} />
+			<UserListPaginationForm
+				usersPerPage={usersPerPage}
+				setPage={setPage}
+				setUsersPerPage={setUsersPerPage}
+			/>
 		</section>
 	);
 }
