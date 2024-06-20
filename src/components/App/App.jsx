@@ -22,7 +22,7 @@ export default function App() {
 
 	return (
 		<section className={css.app}>
-			<h1>Listado de usuarios</h1>
+			<h1 className={css.title}>Listado de usuarios</h1>
 			<FormUserList
 				userToSearch={userToSearch}
 				isCheckedActive={isCheckedActive}

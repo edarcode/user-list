@@ -15,6 +15,7 @@
 	padding: var(--p-md) var(--p-lg);
 	padding-right: var(--p-right-select);
 	appearance: none;
+	width: 100%;
 }
 
 .select:focus {

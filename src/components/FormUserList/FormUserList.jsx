@@ -20,22 +20,17 @@ export default function FormUserList({
 				value={userToSearch}
 				onChange={e => setUserToSearch(e.target.value)}
 			/>
-			<InputCheckbox
-				text="activos"
-				checked={isCheckedActive}
-				onChange={e => setIsCheckedActive(e.target.checked)}
-			/>
-
-			<Select
-				className={css.order}
-				value={sortBy}
-				onChange={e => setSortBy(e.target.value)}
-			>
+			<Select value={sortBy} onChange={e => setSortBy(e.target.value)}>
 				<option value={SORT_BY.default}>defecto</option>
 				<option value={SORT_BY.name}>nombre</option>
 				<option value={SORT_BY.role}>role</option>
 				<option value={SORT_BY.state}>estado</option>
 			</Select>
+			<InputCheckbox
+				text="activos"
+				checked={isCheckedActive}
+				onChange={e => setIsCheckedActive(e.target.checked)}
+			/>
 		</form>
 	);
 }
