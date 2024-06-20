@@ -5,7 +5,3 @@
 @import "./styles/fonts.css";
 @import "./styles/paddings.css";
 @import "./styles/gap.css";
-
-svg {
-	width: 30px;
-}
