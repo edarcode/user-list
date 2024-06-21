@@ -17,6 +17,7 @@ export const useFormUserList = () => {
 			userToSearch: newUserToSearch
 		});
 	};
+
 	const setIsCheckedActive = newIsCheckedActive => {
 		setFormUserList({
 			...formUserList,
@@ -24,12 +25,15 @@ export const useFormUserList = () => {
 			isCheckedActive: newIsCheckedActive
 		});
 	};
+
 	const setSortBy = newSortBy => {
 		setFormUserList({ ...formUserList, sortBy: newSortBy });
 	};
+
 	const setPage = newPage => {
 		setFormUserList({ ...formUserList, page: newPage });
 	};
+
 	const setUsersPerPage = newUsersPerPage => {
 		setFormUserList({ ...formUserList, usersPerPage: newUsersPerPage });
 	};
