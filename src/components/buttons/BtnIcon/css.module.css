@@ -7,10 +7,12 @@
 	cursor: pointer;
 }
 
-.fill {
-	background-color: var(--c-black);
-	color: var(--c-white);
-	border-radius: 50%;
+.black {
+	color: var(--c-black);
+}
+
+.red {
+	color: var(--c-red);
 }
 
 .disabled {
@@ -18,15 +20,16 @@
 	cursor: initial;
 }
 
-.err {
-	color: var(--c-red);
-}
-.fillErr {
-	background-color: var(--c-red);
+.fill {
 	color: var(--c-white);
+	border-radius: 50%;
+	background-color: var(--c-black);
+}
+
+.fillRed {
+	background-color: var(--c-red);
 }
 
 .fillDisabled {
 	background-color: var(--c-lightgray);
-	color: var(--c-white);
 }
