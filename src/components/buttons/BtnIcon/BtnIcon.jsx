@@ -10,7 +10,7 @@ export default function BtnIcon({
 	...props
 }) {
 	const Icon = icon || Pencil;
-	const btnStyles = setBtnStyles(kind);
+	const btnStyles = setBtnStyles(kind, props.disabled);
 	const allClassName = [css.btn, ...btnStyles, className];
 	const finalClassNameBtn = addAllClassName(allClassName);
 
@@ -26,11 +26,11 @@ const BTN_STYLES = {
 	[BTN__ICON_KIND.fillBlack]: css.fillBlack,
 	[BTN__ICON_KIND.red]: css.red,
 	[BTN__ICON_KIND.fillRed]: css.fillRed,
-	[BTN__ICON_KIND.disabled]: css.disabled,
-	[BTN__ICON_KIND.fillDisabled]: css.fillDisabled
+	[BTN__ICON_KIND.disabled]: css.disabled
 };
 
-const setBtnStyles = kind => {
+const setBtnStyles = (kind, disabled) => {
+	if (disabled) return [BTN_STYLES.disabled];
 	const btnStyles = [];
 	kind && btnStyles.push(BTN_STYLES[kind]);
 

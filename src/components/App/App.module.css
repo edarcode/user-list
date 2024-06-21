@@ -9,3 +9,11 @@
 .title {
 	text-align: center;
 }
+
+.pagination {
+	display: flex;
+	gap: var(--g-md);
+}
+.pageSelector {
+	margin-left: auto;
+}

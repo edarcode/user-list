@@ -3,6 +3,7 @@ import { useFormUserList } from "../../hooks/useFormUserList.jsx";
 import { useUsers } from "../../hooks/useUsers.jsx";
 import UserList from "../UserList/UserList.jsx";
 import UserListForm from "../UserListForm/UserListForm.jsx";
+import UserListPageSelector from "../UserListPageSelector/UserListPageSelector.jsx";
 import UserListPaginationForm from "../UserListPaginationForm/UserListPaginationForm.jsx";
 import css from "./App.module.css";
 
@@ -11,7 +12,7 @@ export default function App() {
 		userToSearch,
 		isCheckedActive,
 		sortBy,
-
+		page,
 		usersPerPage,
 		setUserToSearch,
 		setIsCheckedActive,
@@ -20,10 +21,11 @@ export default function App() {
 		setUsersPerPage
 	} = useFormUserList();
 
-	const { users } = useUsers(USERS, {
+	const { users, totalPages } = useUsers(USERS, {
 		isCheckedActive,
 		userToSearch,
 		sortBy,
+		page,
 		usersPerPage
 	});
 
@@ -39,11 +41,18 @@ export default function App() {
 				setSortBy={setSortBy}
 			/>
 			<UserList users={users} />
-			<UserListPaginationForm
-				usersPerPage={usersPerPage}
-				setPage={setPage}
-				setUsersPerPage={setUsersPerPage}
-			/>
+			<div className={css.pagination}>
+				<UserListPaginationForm
+					usersPerPage={usersPerPage}
+					setUsersPerPage={setUsersPerPage}
+				/>
+				<UserListPageSelector
+					className={css.pageSelector}
+					page={page}
+					setPage={setPage}
+					totalPages={totalPages}
+				/>
+			</div>
 		</section>
 	);
 }

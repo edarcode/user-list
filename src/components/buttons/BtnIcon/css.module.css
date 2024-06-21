@@ -21,11 +21,12 @@
 
 .disabled {
 	color: var(--c-lightgray);
+	background-color: var(--c-lightgray);
 }
 
 .fillBlack,
 .fillRed,
-.fillDisabled {
+.disabled {
 	border-radius: 50%;
 	color: var(--c-white);
 }
@@ -36,8 +37,4 @@
 
 .fillRed {
 	background-color: var(--c-red);
-}
-
-.fillDisabled {
-	background-color: var(--c-lightgray);
 }

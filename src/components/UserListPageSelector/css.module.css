@@ -1,0 +1,9 @@
+.pageSelector {
+	display: flex;
+	gap: var(--g-md);
+	align-items: center;
+}
+
+.btnLeft svg {
+	transform: rotate(180deg);
+}
