@@ -4,6 +4,7 @@ import { useUsers } from "../../hooks/useUsers.jsx";
 import UserList from "../UserList/UserList.jsx";
 import UserListForm from "../UserListForm/UserListForm.jsx";
 import UserListPaginationForm from "../UserListPaginationForm/UserListPaginationForm.jsx";
+import BtnIcon from "../buttons/BtnIcon/BtnIcon.jsx";
 import css from "./App.module.css";
 
 export default function App() {
@@ -44,6 +45,7 @@ export default function App() {
 				setPage={setPage}
 				setUsersPerPage={setUsersPerPage}
 			/>
+			<BtnIcon></BtnIcon>
 		</section>
 	);
 }

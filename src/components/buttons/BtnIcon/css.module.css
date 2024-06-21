@@ -7,6 +7,10 @@
 	cursor: pointer;
 }
 
+.btn:disabled {
+	cursor: initial;
+}
+
 .black {
 	color: var(--c-black);
 }
@@ -17,12 +21,16 @@
 
 .disabled {
 	color: var(--c-lightgray);
-	cursor: initial;
 }
 
-.fill {
-	color: var(--c-white);
+.fillBlack,
+.fillRed,
+.fillDisabled {
 	border-radius: 50%;
+	color: var(--c-white);
+}
+
+.fillBlack {
 	background-color: var(--c-black);
 }
 
