@@ -35,7 +35,11 @@ export const useFormUserList = () => {
 	};
 
 	const setUsersPerPage = newUsersPerPage => {
-		setFormUserList({ ...formUserList, usersPerPage: newUsersPerPage });
+		setFormUserList({
+			...formUserList,
+			page: 1,
+			usersPerPage: newUsersPerPage
+		});
 	};
 
 	return {
