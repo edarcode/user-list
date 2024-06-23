@@ -21,13 +21,15 @@ export default function App() {
 		setUsersPerPage
 	} = useFormUserList();
 
-	const { users, totalPages } = useUsers(USERS, {
+	const formUserList = {
 		isCheckedActive,
 		userToSearch,
 		sortBy,
 		page,
 		usersPerPage
-	});
+	};
+
+	const { users, totalPages } = useUsers(USERS, formUserList);
 
 	return (
 		<section className={css.app}>

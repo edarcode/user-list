@@ -26,5 +26,19 @@ export const USERS = [
 		username: "caro",
 		state: false,
 		role: "otro"
+	},
+	{
+		id: 5,
+		name: "lore rivero",
+		username: "caro",
+		state: false,
+		role: "otro"
+	},
+	{
+		id: 6,
+		name: "gustavo cerati",
+		username: "caro",
+		state: true,
+		role: "estudiante"
 	}
 ];
