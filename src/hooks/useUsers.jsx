@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { SORT_BY } from "../constants/sortBy.js";
 import { USERS } from "../constants/users.js";
-import { filterUsersByName } from "../utils/filterUsersByName.js";
-import { filterUsersByState } from "../utils/filterUsersByState.js";
-import { paginateUsers } from "../utils/paginateUsers.js";
-import { sortUsersBy } from "../utils/sortUsersBy.js";
+import { processingUsersToDisplay } from "../utils/processingUsersToDisplay.js";
 
 const initialUsers = {
 	allUsers: USERS,
@@ -20,8 +17,6 @@ const initialUsers = {
 export const useUsers = () => {
 	const [users, setUsers] = useState(initialUsers);
 	const { allUsers, formUserList } = users;
-	const { isCheckedActive, page, sortBy, userToSearch, usersPerPage } =
-		formUserList;
 
 	const setUserToSearch = newUserToSearch => {
 		setUsers({
@@ -48,7 +43,7 @@ export const useUsers = () => {
 	const setSortBy = newSortBy => {
 		setUsers({
 			allUsers,
-			formUserList: { ...formUserList, sortBy: newSortBy }
+			formUserList: { ...formUserList, page: 1, sortBy: newSortBy }
 		});
 	};
 
@@ -67,14 +62,10 @@ export const useUsers = () => {
 		});
 	};
 
-	let newUsers = filterUsersByState(allUsers, isCheckedActive);
-	newUsers = filterUsersByName(newUsers, userToSearch);
-	newUsers = sortUsersBy(newUsers, sortBy);
-	const totalPages = Math.ceil(newUsers.length / usersPerPage) || 1;
-	newUsers = paginateUsers(newUsers, { page, usersPerPage });
+	const { processedUsers, totalPages } = processingUsersToDisplay(users);
 
 	return {
-		allUsers: newUsers,
+		allUsers: processedUsers,
 		formUserList,
 		totalPages,
 		actions: {
