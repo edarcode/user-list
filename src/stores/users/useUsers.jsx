@@ -1,42 +1,36 @@
 import { create } from "zustand";
-import { SORT_BY } from "../../constants/sortBy.js";
-import { USERS } from "../../constants/users.js";
 import { changePageUsers } from "./changePageUsers.js";
-import { getUsersToDisplay } from "./getUsersToDisplay.js";
+import { getUsers } from "./getUsers.js";
 import { modifyUsersPerPage } from "./modifyUsersPerPage.js";
 import { searchActiveUsers } from "./searchActiveUsers.js";
 import { searchUserByName } from "./searchUserByName.js";
 import { sortUsersBy } from "./sortUsersBy.js";
 
 const initialStateUsers = {
-	allUsers: USERS,
+	allUsers: [],
+	page: 1,
+	usersPerPage: 6,
+	totalPages: 1,
 	userToSearch: "",
 	isCheckedActive: false,
-	sortBy: SORT_BY.default,
-	page: 1,
-	usersPerPage: 2,
-	totalPages: 1,
-	display: []
+	sortBy: ""
 };
 
-export const useUsers = create(set => ({
+export const useUsers = create((set, get) => ({
 	...initialStateUsers,
-	getUsersToDisplay: () => {
-		set(state => getUsersToDisplay(state));
-	},
-	searchUserByName: newUserToSearch => {
-		set(state => searchUserByName(state, newUserToSearch));
-	},
-	searchActiveUsers: newIsCheckedActive => {
-		set(state => searchActiveUsers(state, newIsCheckedActive));
-	},
-	sortUsersBy: newSortBy => {
-		set(state => sortUsersBy(state, newSortBy));
-	},
-	changePageUsers: newPage => {
-		set(state => changePageUsers(state, newPage));
-	},
-	modifyUsersPerPage: newUsersPerPage => {
-		set(state => modifyUsersPerPage(state, newUsersPerPage));
-	}
+
+	getUsers: () => getUsers(set, get),
+
+	changePageUsers: newPage => changePageUsers({ set, get, newPage }),
+
+	searchUserByName: newUserToSearch =>
+		searchUserByName({ set, get, newUserToSearch }),
+
+	searchActiveUsers: newIsCheckedActive =>
+		searchActiveUsers({ set, get, newIsCheckedActive }),
+
+	sortUsersBy: newSortBy => sortUsersBy({ set, get, newSortBy }),
+
+	modifyUsersPerPage: newUsersPerPage =>
+		modifyUsersPerPage({ set, get, newUsersPerPage })
 }));

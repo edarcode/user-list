@@ -1,15 +1,5 @@
-import { getUsersToDisplay } from "./getUsersToDisplay.js";
-
-export const modifyUsersPerPage = (state, newUsersPerPage) => {
-	const updatedVirtual = getUsersToDisplay({
-		...state,
-		page: 1,
-		usersPerPage: newUsersPerPage
-	});
-
-	return {
-		...updatedVirtual,
-		page: 1,
-		usersPerPage: newUsersPerPage
-	};
+export const modifyUsersPerPage = ({ set, get, newUsersPerPage }) => {
+	set({ usersPerPage: newUsersPerPage });
+	const { getUsers } = get();
+	getUsers();
 };

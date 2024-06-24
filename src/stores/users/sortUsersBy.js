@@ -1,15 +1,5 @@
-import { getUsersToDisplay } from "./getUsersToDisplay.js";
-
-export const sortUsersBy = (state, newSortBy) => {
-	const updatedVirtual = getUsersToDisplay({
-		...state,
-		page: 1,
-		sortBy: newSortBy
-	});
-
-	return {
-		...updatedVirtual,
-		page: 1,
-		sortBy: newSortBy
-	};
+export const sortUsersBy = ({ set, get, newSortBy }) => {
+	set({ sortBy: newSortBy });
+	const { getUsers } = get();
+	getUsers();
 };
