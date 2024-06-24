@@ -1,4 +1,4 @@
-import { useUsers } from "../../stores/users/userUsers.jsx";
+import { useUsers } from "../../stores/users/useUsers.jsx";
 import Select from "../forms/Select/Select.jsx";
 import css from "./css.module.css";
 

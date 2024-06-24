@@ -1,5 +1,5 @@
 import { SORT_BY } from "../../constants/sortBy.js";
-import { useUsers } from "../../stores/users/userUsers.jsx";
+import { useUsers } from "../../stores/users/useUsers.jsx";
 import InputCheckbox from "../forms/InputCheckbox/InputCheckbox.jsx";
 import InputSearch from "../forms/InputSearch/InputSearch.jsx";
 import Select from "../forms/Select/Select.jsx";

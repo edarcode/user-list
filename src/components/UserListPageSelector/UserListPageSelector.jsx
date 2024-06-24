@@ -1,5 +1,5 @@
 import { BTN__ICON_KIND } from "../../constants/btnIconKind.js";
-import { useUsers } from "../../stores/users/userUsers.jsx";
+import { useUsers } from "../../stores/users/useUsers.jsx";
 import { addAllClassName } from "../../utils/addAllClassName.js";
 import BtnIcon from "../buttons/BtnIcon/BtnIcon.jsx";
 import Arrow from "../icons/Arrow.jsx";
