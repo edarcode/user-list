@@ -5,7 +5,7 @@ import BtnIcon from "../buttons/BtnIcon/BtnIcon.jsx";
 import Arrow from "../icons/Arrow.jsx";
 import css from "./css.module.css";
 
-export default function UserListPageSelector({ className }) {
+export default function UserListPageSelectorForm({ className }) {
 	const page = useUsers(users => users.page);
 	const changePageUsers = useUsers(users => users.changePageUsers);
 	const totalPages = useUsers(users => users.totalPages);
