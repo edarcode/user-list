@@ -6,8 +6,8 @@ import { useUsers } from "../../stores/users/useUsers.jsx";
 import css from "./App.module.css";
 
 export default function App() {
-	const getFirstUsers = useUsers(state => state.updateDisplayAndTotalPages);
-	getFirstUsers();
+	const getUsersToDisplay = useUsers(state => state.getUsersToDisplay);
+	getUsersToDisplay();
 
 	return (
 		<section className={css.app}>

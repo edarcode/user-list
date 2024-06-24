@@ -10,18 +10,19 @@ export default function FormUserList() {
 	const userToSearch = useUsers(users => users.userToSearch);
 	const isCheckedActive = useUsers(users => users.isCheckedActive);
 	const sortBy = useUsers(users => users.sortBy);
-	const updateUserToSearch = useUsers(users => users.updateUserToSearch);
-	const updateIsCheckedActive = useUsers(users => users.updateIsCheckedActive);
-	const updateSortBy = useUsers(users => users.updateSortBy);
+
+	const searchUserByName = useUsers(users => users.searchUserByName);
+	const searchActiveUsers = useUsers(users => users.searchActiveUsers);
+	const sortUsersBy = useUsers(users => users.sortUsersBy);
 
 	return (
 		<form className={css.form}>
 			<InputSearch
 				placeholder="Nombre"
 				value={userToSearch}
-				onChange={e => updateUserToSearch(e.target.value)}
+				onChange={e => searchUserByName(e.target.value)}
 			/>
-			<Select value={sortBy} onChange={e => updateSortBy(e.target.value)}>
+			<Select value={sortBy} onChange={e => sortUsersBy(e.target.value)}>
 				<option value={SORT_BY.default}>defecto</option>
 				<option value={SORT_BY.name}>nombre</option>
 				<option value={SORT_BY.role}>role</option>
@@ -30,7 +31,7 @@ export default function FormUserList() {
 			<InputCheckbox
 				text="activos"
 				checked={isCheckedActive}
-				onChange={e => updateIsCheckedActive(e.target.checked)}
+				onChange={e => searchActiveUsers(e.target.checked)}
 			/>
 		</form>
 	);

@@ -4,12 +4,12 @@ import css from "./css.module.css";
 
 export default function UserListPaginationForm() {
 	const usersPerPage = useUsers(users => users.usersPerPage);
-	const updateUsersPerPage = useUsers(users => users.updateUsersPerPage);
+	const modifyUsersPerPage = useUsers(users => users.modifyUsersPerPage);
 	return (
 		<form className={css.form}>
 			<Select
 				value={usersPerPage}
-				onChange={e => updateUsersPerPage(Number(e.target.value))}
+				onChange={e => modifyUsersPerPage(Number(e.target.value))}
 			>
 				<option value={2}>2</option>
 				<option value={4}>4</option>

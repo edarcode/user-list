@@ -7,7 +7,7 @@ import css from "./css.module.css";
 
 export default function UserListPageSelector({ className }) {
 	const page = useUsers(users => users.page);
-	const updatePage = useUsers(users => users.updatePage);
+	const changePageUsers = useUsers(users => users.changePageUsers);
 	const totalPages = useUsers(users => users.totalPages);
 
 	const isDisabledBtnLeft = page <= 1;
@@ -21,7 +21,7 @@ export default function UserListPageSelector({ className }) {
 				className={css.btnLeft}
 				icon={Arrow}
 				kind={BTN__ICON_KIND.fillBlack}
-				onClick={() => updatePage(page - 1)}
+				onClick={() => changePageUsers(page - 1)}
 				disabled={isDisabledBtnLeft}
 			/>
 			<p>
@@ -30,7 +30,7 @@ export default function UserListPageSelector({ className }) {
 			<BtnIcon
 				icon={Arrow}
 				kind={BTN__ICON_KIND.fillBlack}
-				onClick={() => updatePage(page + 1)}
+				onClick={() => changePageUsers(page + 1)}
 				disabled={isDisabledBtnRight}
 			/>
 		</div>
