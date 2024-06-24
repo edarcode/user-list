@@ -13,7 +13,8 @@ const initialStateUsers = {
 	totalPages: 1,
 	userToSearch: "",
 	isCheckedActive: false,
-	sortBy: ""
+	sortBy: "",
+	loading: false
 };
 
 export const useUsers = create((set, get) => ({

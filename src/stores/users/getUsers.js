@@ -5,13 +5,14 @@ export const getUsers = async (set, get) => {
 	const url = `${URL_USERS}?page=${page}&take=${usersPerPage}`;
 	const newUrl = addQueries(url, { userToSearch, isCheckedActive, sortBy });
 
+	set({ loading: true });
 	const res = await fetch(newUrl);
 	if (!res.ok) {
 		throw new Error("Network response was not ok " + res.statusText);
 	}
 
 	const { users, totalPages } = await res.json();
-	set({ allUsers: users, totalPages });
+	set({ allUsers: users, totalPages, loading: false });
 };
 
 const addQueries = (url, queries) => {
