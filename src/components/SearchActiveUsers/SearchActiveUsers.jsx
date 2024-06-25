@@ -1,12 +1,13 @@
 import { useUsers } from "../../stores/users/useUsers.jsx";
 import InputCheckbox from "../forms/InputCheckbox/InputCheckbox.jsx";
 
-export default function SearchActiveUsers() {
+export default function SearchActiveUsers({ className }) {
 	const isCheckedActive = useUsers(users => users.isCheckedActive);
 	const searchActiveUsers = useUsers(users => users.searchActiveUsers);
 
 	return (
 		<InputCheckbox
+			className={className}
 			text="activos"
 			checked={isCheckedActive}
 			onChange={e => searchActiveUsers(e.target.checked)}

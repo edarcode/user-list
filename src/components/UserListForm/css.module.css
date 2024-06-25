@@ -3,3 +3,7 @@
 	grid-template-columns: 1fr auto;
 	gap: 10px;
 }
+
+.form .checkbox {
+	justify-self: start;
+}

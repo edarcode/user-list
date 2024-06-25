@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { devtools } from "zustand/middleware";
 import { changePageUsers } from "./changePageUsers.js";
 import { getUsers } from "./getUsers.js";
 import { modifyUsersPerPage } from "./modifyUsersPerPage.js";
@@ -17,21 +18,23 @@ const initialStateUsers = {
 	loading: false
 };
 
-export const useUsers = create((set, get) => ({
-	...initialStateUsers,
+export const useUsers = create(
+	devtools((set, get) => ({
+		...initialStateUsers,
 
-	getUsers: () => getUsers(set, get),
+		getUsers: () => getUsers(set, get),
 
-	changePageUsers: newPage => changePageUsers({ set, get, newPage }),
+		changePageUsers: newPage => changePageUsers({ set, get, newPage }),
 
-	searchUserByName: newUserToSearch =>
-		searchUserByName({ set, get, newUserToSearch }),
+		searchUserByName: newUserToSearch =>
+			searchUserByName({ set, get, newUserToSearch }),
 
-	searchActiveUsers: newIsCheckedActive =>
-		searchActiveUsers({ set, get, newIsCheckedActive }),
+		searchActiveUsers: newIsCheckedActive =>
+			searchActiveUsers({ set, get, newIsCheckedActive }),
 
-	sortUsersBy: newSortBy => sortUsersBy({ set, get, newSortBy }),
+		sortUsersBy: newSortBy => sortUsersBy({ set, get, newSortBy }),
 
-	modifyUsersPerPage: newUsersPerPage =>
-		modifyUsersPerPage({ set, get, newUsersPerPage })
-}));
+		modifyUsersPerPage: newUsersPerPage =>
+			modifyUsersPerPage({ set, get, newUsersPerPage })
+	}))
+);
