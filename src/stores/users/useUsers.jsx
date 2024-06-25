@@ -15,19 +15,20 @@ const initialStateUsers = {
 	userToSearch: "",
 	isCheckedActive: false,
 	sortBy: "",
-	loading: false
+	loading: false,
+	err: ""
 };
 
 export const useUsers = create(
 	devtools((set, get) => ({
 		...initialStateUsers,
 
-		getUsers: () => getUsers(set, get),
+		getUsers: (params = {}) => getUsers({ set, get, ...params }),
 
 		changePageUsers: newPage => changePageUsers({ set, get, newPage }),
 
-		searchUserByName: newUserToSearch =>
-			searchUserByName({ set, get, newUserToSearch }),
+		searchUserByName: ({ newUserToSearch, signal }) =>
+			searchUserByName({ set, get, newUserToSearch, signal }),
 
 		searchActiveUsers: newIsCheckedActive =>
 			searchActiveUsers({ set, get, newIsCheckedActive }),

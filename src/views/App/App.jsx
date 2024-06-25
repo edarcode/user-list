@@ -11,7 +11,7 @@ export default function App() {
 	const getUsers = useUsers(state => state.getUsers);
 
 	useEffect(() => {
-		getUsers();
+		getUsers({});
 	}, [getUsers]);
 
 	return (

@@ -1,18 +1,25 @@
 import { URL_USERS } from "../../constants/urls.js";
 
-export const getUsers = async (set, get) => {
+export const getUsers = async ({ set, get, signal }) => {
 	const { page, usersPerPage, userToSearch, isCheckedActive, sortBy } = get();
 	const url = `${URL_USERS}?page=${page}&take=${usersPerPage}`;
 	const newUrl = addQueries(url, { userToSearch, isCheckedActive, sortBy });
 
 	set({ loading: true });
-	const res = await fetch(newUrl);
-	if (!res.ok) {
-		throw new Error("Network response was not ok " + res.statusText);
-	}
+	try {
+		const res = await fetch(newUrl, { signal });
+		if (!res.ok) {
+			throw new Error("Network response was not ok " + res.statusText);
+		}
+		const { users, totalPages } = await res.json();
 
-	const { users, totalPages } = await res.json();
-	set({ allUsers: users, totalPages, loading: false });
+		set({ allUsers: users, totalPages, loading: false });
+	} catch (error) {
+		if (error.name === "AbortError") {
+			return set({ loading: false });
+		}
+		set({ loading: false, err: error.message });
+	}
 };
 
 const addQueries = (url, queries) => {
