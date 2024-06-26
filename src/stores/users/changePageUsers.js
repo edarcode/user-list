@@ -1,5 +1,3 @@
-export const changePageUsers = ({ set, get, newPage }) => {
+export const changePageUsers = ({ set, newPage }) => {
 	set({ page: newPage });
-	const { getUsers } = get();
-	getUsers();
 };

@@ -1,11 +1,11 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { changeIsChekedActive } from "./changeIsChekedActive.js";
 import { changePageUsers } from "./changePageUsers.js";
+import { changeSortBy } from "./changeSortBy.js";
+import { changeUserToSearch } from "./changeUserToSearch.js";
+import { changeUsersPerPage } from "./changeUsersPerPage.js";
 import { getUsers } from "./getUsers.js";
-import { modifyUsersPerPage } from "./modifyUsersPerPage.js";
-import { searchActiveUsers } from "./searchActiveUsers.js";
-import { searchUserByName } from "./searchUserByName.js";
-import { sortUsersBy } from "./sortUsersBy.js";
 
 const initialStateUsers = {
 	allUsers: [],
@@ -23,19 +23,19 @@ export const useUsers = create(
 	devtools((set, get) => ({
 		...initialStateUsers,
 
-		getUsers: (params = {}) => getUsers({ set, get, ...params }),
+		getUsers: ({ signal } = {}) => getUsers({ set, get, signal }),
 
-		changePageUsers: newPage => changePageUsers({ set, get, newPage }),
+		changePageUsers: newPage => changePageUsers({ set, newPage }),
 
-		searchUserByName: ({ newUserToSearch, signal }) =>
-			searchUserByName({ set, get, newUserToSearch, signal }),
+		changeUserToSearch: newUserToSearch =>
+			changeUserToSearch({ set, newUserToSearch }),
 
-		searchActiveUsers: newIsCheckedActive =>
-			searchActiveUsers({ set, get, newIsCheckedActive }),
+		changeIsChekedActive: newIsCheckedActive =>
+			changeIsChekedActive({ set, newIsCheckedActive }),
 
-		sortUsersBy: newSortBy => sortUsersBy({ set, get, newSortBy }),
+		changeSortBy: newSortBy => changeSortBy({ set, newSortBy }),
 
-		modifyUsersPerPage: newUsersPerPage =>
-			modifyUsersPerPage({ set, get, newUsersPerPage })
+		changeUsersPerPage: newUsersPerPage =>
+			changeUsersPerPage({ set, newUsersPerPage })
 	}))
 );

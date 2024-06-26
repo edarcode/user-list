@@ -1,4 +1,5 @@
 import { BTN__ICON_KIND } from "../../constants/btnIconKind.js";
+import { useGetUsers } from "../../hooks/useGetUsers.jsx";
 import { useUsers } from "../../stores/users/useUsers.jsx";
 import { addAllClassName } from "../../utils/addAllClassName.js";
 import BtnIcon from "../buttons/BtnIcon/BtnIcon.jsx";
@@ -9,6 +10,8 @@ export default function UserListPageSelectorForm({ className }) {
 	const page = useUsers(users => users.page);
 	const changePageUsers = useUsers(users => users.changePageUsers);
 	const totalPages = useUsers(users => users.totalPages);
+
+	useGetUsers(page);
 
 	const isDisabledBtnLeft = page <= 1;
 	const isDisabledBtnRight = page >= totalPages;
