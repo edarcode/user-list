@@ -8,17 +8,14 @@ export const getUsers = async ({ set, get, signal }) => {
 	set({ loading: true });
 	try {
 		const res = await fetch(newUrl, { signal });
-		if (!res.ok) {
-			throw new Error("Network response was not ok " + res.statusText);
-		}
+		if (!res.ok) throw new Error(res.statusText);
 		const { users, totalPages } = await res.json();
-
-		set({ allUsers: users, totalPages, loading: false });
+		set({ allUsers: users, totalPages });
 	} catch (error) {
-		if (error.name === "AbortError") {
-			return set({ loading: false });
-		}
-		set({ loading: false, err: error.message });
+		if (error.name === "AbortError") return;
+		set({ err: error.message });
+	} finally {
+		set({ loading: false });
 	}
 };
 
