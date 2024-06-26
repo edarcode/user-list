@@ -16,6 +16,14 @@ export default function UserListPageSelectorForm({ className }) {
 	const isDisabledBtnLeft = page <= 1;
 	const isDisabledBtnRight = page >= totalPages;
 
+	const kindLeft = isDisabledBtnLeft
+		? BTN__ICON_KIND.fillDisabled
+		: BTN__ICON_KIND.fillBlack;
+
+	const kindRight = isDisabledBtnRight
+		? BTN__ICON_KIND.fillDisabled
+		: BTN__ICON_KIND.fillBlack;
+
 	const finalClassName = addAllClassName([css.pageSelector, className]);
 
 	return (
@@ -23,7 +31,7 @@ export default function UserListPageSelectorForm({ className }) {
 			<BtnIcon
 				className={css.btnLeft}
 				icon={Arrow}
-				kind={BTN__ICON_KIND.fillBlack}
+				kind={kindLeft}
 				onClick={() => changePageUsers(page - 1)}
 				disabled={isDisabledBtnLeft}
 			/>
@@ -32,7 +40,7 @@ export default function UserListPageSelectorForm({ className }) {
 			</p>
 			<BtnIcon
 				icon={Arrow}
-				kind={BTN__ICON_KIND.fillBlack}
+				kind={kindRight}
 				onClick={() => changePageUsers(page + 1)}
 				disabled={isDisabledBtnRight}
 			/>

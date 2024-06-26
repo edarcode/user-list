@@ -5,28 +5,27 @@
 	height: 30px;
 	padding: 5px;
 	cursor: pointer;
+	color: var(--c-black);
 }
 
 .btn:disabled {
 	cursor: initial;
+	color: var(--c-lightgray);
+	background-color: transparent;
 }
 
-.black {
-	color: var(--c-black);
+button.fillDisabled.powerFillDisabled {
+	background-color: var(--c-lightgray);
+	color: var(--c-white);
+	border-radius: 50%;
 }
 
 .red {
 	color: var(--c-red);
 }
 
-.disabled {
-	color: var(--c-lightgray);
-	background-color: var(--c-lightgray);
-}
-
 .fillBlack,
-.fillRed,
-.disabled {
+.fillRed {
 	border-radius: 50%;
 	color: var(--c-white);
 }

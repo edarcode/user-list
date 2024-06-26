@@ -3,15 +3,9 @@ import { addAllClassName } from "../../../utils/addAllClassName.js";
 import Pencil from "../../icons/Pencil.jsx";
 import css from "./css.module.css";
 
-export default function BtnIcon({
-	className,
-	icon,
-	kind = BTN__ICON_KIND.black,
-	...props
-}) {
+export default function BtnIcon({ className, icon, kind, ...props }) {
 	const Icon = icon || Pencil;
-	const btnStyles = setBtnStyles(kind, props.disabled);
-	const allClassName = [css.btn, ...btnStyles, className];
+	const allClassName = [css.btn, className, BTN_STYLES[kind]];
 	const finalClassNameBtn = addAllClassName(allClassName);
 
 	return (
@@ -22,17 +16,8 @@ export default function BtnIcon({
 }
 
 const BTN_STYLES = {
-	[BTN__ICON_KIND.black]: css.black,
 	[BTN__ICON_KIND.fillBlack]: css.fillBlack,
 	[BTN__ICON_KIND.red]: css.red,
 	[BTN__ICON_KIND.fillRed]: css.fillRed,
-	[BTN__ICON_KIND.disabled]: css.disabled
-};
-
-const setBtnStyles = (kind, disabled) => {
-	if (disabled) return [BTN_STYLES.disabled];
-	const btnStyles = [];
-	kind && btnStyles.push(BTN_STYLES[kind]);
-
-	return btnStyles;
+	[BTN__ICON_KIND.fillDisabled]: `${css.fillDisabled} ${css.powerFillDisabled}`
 };

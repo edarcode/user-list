@@ -1,0 +1,31 @@
+.btn {
+	cursor: pointer;
+	border: none;
+	background-color: var(--c-black);
+	color: var(--c-white);
+	padding: var(--p-md) var(--p-lg);
+	height: 40px;
+	border-radius: var(--r-md);
+}
+
+.btn:focus {
+	outline: transparent;
+}
+
+.btn:focus {
+	box-shadow: var(--s-md);
+}
+
+.btn:disabled {
+	cursor: initial;
+	color: var(--c-lightgray);
+	background-color: transparent;
+	box-shadow: var(--s-sm);
+	border: none;
+}
+
+.white {
+	border: 1px solid var(--c-black);
+	color: var(--c-black);
+	background-color: transparent;
+}
