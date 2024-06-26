@@ -1,0 +1,38 @@
+.label {
+	justify-self: start;
+	display: grid;
+	gap: var(--g-sm);
+}
+
+.input {
+	border: none;
+	outline: transparent;
+	box-shadow: var(--s-sm);
+	border-radius: var(--r-sm);
+	padding: 8px 16px;
+}
+
+.input:focus {
+	box-shadow: var(--s-md);
+}
+
+.input::placeholder {
+	color: var(--c-lightgray);
+}
+
+.title {
+	font-weight: bold;
+}
+
+.title,
+.err {
+	margin-left: 5px;
+}
+
+.err {
+	color: var(--c-red);
+}
+
+.errInput {
+	border: 1px solid var(--c-red);
+}
