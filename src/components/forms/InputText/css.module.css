@@ -1,6 +1,7 @@
 .label {
 	display: grid;
 	gap: var(--g-sm);
+	cursor: text;
 }
 
 .input {

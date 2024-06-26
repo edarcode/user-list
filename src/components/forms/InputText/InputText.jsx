@@ -14,7 +14,7 @@ export default function InputText({
 		<label className={finalClassNameLabel}>
 			<p className={css.title}>{title}</p>
 			<input {...props} className={finalClassNameInput} type="text"></input>
-			<p className={css.err}>{err && err}</p>
+			{err && <p className={css.err}>{err}</p>}
 		</label>
 	);
 }
