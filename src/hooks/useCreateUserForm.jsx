@@ -12,31 +12,31 @@ export const useCreateUserForm = () => {
 	const form = createUserForm;
 
 	useEffect(() => {
-		if (form.username.loading) {
-			isValidUsernameInDb(form.username.value)
-				.then(isValid => {
-					!isValid && setInvalidUsernameInDb({ setCreateUserForm, form });
-					isValid && setValidUsernameInDb({ setCreateUserForm, form });
-				})
-				.catch(() => {
-					setErrorServer({ setCreateUserForm, form });
-				});
-		}
+		if (!form.username.loading) return;
+		const controller = new AbortController();
+
+		setValidOrInvlidUsername({
+			signal: controller.signal,
+			form,
+			setCreateUserForm
+		});
+
+		return () => controller.abort();
 	}, [form]);
 
 	const setName = newName => {
 		const { success, error } = nameSchema.safeParse(newName);
 
-		const newCreateUserForm = { ...createUserForm };
+		const newForm = { ...form };
 
 		if (!success) {
 			const errMsg = error.errors[0].message;
-			newCreateUserForm.name = { value: newName, err: errMsg };
+			newForm.name = { ...form.name, value: newName, err: errMsg };
 		} else {
-			newCreateUserForm.name = { value: newName, err: "" };
+			newForm.name = { ...form.name, value: newName, err: "" };
 		}
 
-		setCreateUserForm(newCreateUserForm);
+		setCreateUserForm(newForm);
 	};
 
 	const setUsername = newUsername => {
@@ -47,12 +47,14 @@ export const useCreateUserForm = () => {
 		if (!success) {
 			const errMsg = error.errors[0].message;
 			newForm.username = {
+				...form.username,
 				value: newUsername,
 				err: errMsg,
 				loading: false
 			};
 		} else {
 			newForm.username = {
+				...form.username,
 				value: newUsername,
 				err: "",
 				loading: true
@@ -70,8 +72,8 @@ export const useCreateUserForm = () => {
 	};
 };
 
-const isValidUsernameInDb = async username => {
-	const res = await fetch(`${URL_USERS}?username=${username}`);
+const isValidUsernameInDb = async ({ username, signal }) => {
+	const res = await fetch(`${URL_USERS}?username=${username}`, { signal });
 	if (!res.ok) throw new Error(res.statusText);
 	const { users } = await res.json();
 	return users.length ? false : true;
@@ -96,4 +98,19 @@ const setErrorServer = ({ setCreateUserForm, form }) => {
 		...form,
 		username: { ...form.username, loading: false, err: "Error de servidor" }
 	});
+};
+
+const setValidOrInvlidUsername = async ({
+	signal,
+	form,
+	setCreateUserForm
+}) => {
+	try {
+		const username = form.username.value;
+		const isValid = await isValidUsernameInDb({ username, signal });
+		!isValid && setInvalidUsernameInDb({ setCreateUserForm, form });
+		isValid && setValidUsernameInDb({ setCreateUserForm, form });
+	} catch (error) {
+		setErrorServer({ setCreateUserForm, form });
+	}
 };
