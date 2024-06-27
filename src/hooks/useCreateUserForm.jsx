@@ -8,7 +8,6 @@ export const useCreateUserForm = () => {
 		name: { value: "", err: "" },
 		username: { value: "", err: "", loading: false }
 	});
-
 	const form = createUserForm;
 
 	useEffect(() => {
@@ -16,7 +15,7 @@ export const useCreateUserForm = () => {
 
 		const controller = new AbortController();
 
-		setValidOrInvlidUsername({
+		setInvlidOrValidUsernameBasedOnDb({
 			signal: controller.signal,
 			username: form.username.value,
 			setCreateUserForm
@@ -50,8 +49,7 @@ export const useCreateUserForm = () => {
 			newForm.username = {
 				...form.username,
 				value: newUsername,
-				err: errMsg,
-				loading: false
+				err: errMsg
 			};
 		} else {
 			newForm.username = {
@@ -73,13 +71,10 @@ export const useCreateUserForm = () => {
 	};
 };
 
-const setValidOrInvlidUsername = async ({
-	signal,
-	username,
-	setCreateUserForm
-}) => {
+const setInvlidOrValidUsernameBasedOnDb = async params => {
+	const { signal, username, setCreateUserForm } = params;
 	try {
-		const isValid = await isValidUsernameInDb({ username, signal });
+		const isValid = await isValidUsernameBasedOnDb({ username, signal });
 		!isValid && setInvalidUsername({ setCreateUserForm });
 		isValid && setValidUsername({ setCreateUserForm });
 	} catch (error) {
@@ -88,7 +83,7 @@ const setValidOrInvlidUsername = async ({
 	}
 };
 
-const isValidUsernameInDb = async ({ username, signal }) => {
+const isValidUsernameBasedOnDb = async ({ username, signal }) => {
 	const res = await fetch(`${URL_USERS}?username=${username}`, { signal });
 	const { users } = await res.json();
 	return users.length ? false : true;
