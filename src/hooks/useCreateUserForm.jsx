@@ -10,6 +10,13 @@ export const useCreateUserForm = () => {
 	});
 	const form = createUserForm;
 
+	const isValidForm =
+		form.name.value &&
+		!form.name.err &&
+		form.username.value &&
+		!form.username.err &&
+		!form.username.loading;
+
 	useEffect(() => {
 		if (!form.username.loading) return;
 
@@ -73,7 +80,8 @@ export const useCreateUserForm = () => {
 		name: form.name,
 		username: form.username,
 		setName,
-		setUsername
+		setUsername,
+		isValidForm
 	};
 };
 

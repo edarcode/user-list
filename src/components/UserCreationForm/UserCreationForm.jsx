@@ -1,5 +1,6 @@
 import { BTN__ICON_KIND } from "../../constants/btnIconKind.js";
 import { ROLES } from "../../constants/roles.js";
+import { createUser } from "../../fetch/createUser.js";
 import { useCreateUserForm } from "../../hooks/useCreateUserForm.jsx";
 import Btn from "../buttons/Btn/Btn.jsx";
 import BtnIcon from "../buttons/BtnIcon/BtnIcon.jsx";
@@ -11,10 +12,35 @@ import Cross from "../icons/Cross.jsx";
 import css from "./css.module.css";
 
 export default function UserCreationForm({ setFilterForm }) {
-	const { name, username, setName, setUsername } = useCreateUserForm();
+	const { name, username, setName, setUsername, isValidForm } =
+		useCreateUserForm();
+
+	const handleSubmit = async e => {
+		e.preventDefault();
+
+		const newUser = {
+			name: name.value,
+			username: username.value,
+			role: e.target.role.value,
+			state: e.target.active.checked
+		};
+		try {
+			await createUser({ body: newUser });
+			console.log("usuario creado");
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
-		<form className={css.form}>
+		<form className={css.form} onSubmit={handleSubmit}>
+			<BtnIcon
+				className={css.cross}
+				type="button"
+				icon={Cross}
+				kind={BTN__ICON_KIND.fillBlack}
+				onClick={setFilterForm}
+			/>
 			<InputText
 				className={css.name}
 				title="nombre"
@@ -33,22 +59,15 @@ export default function UserCreationForm({ setFilterForm }) {
 				success={!username.loading && !username.err && username.value}
 				onChange={e => setUsername(e.target.value)}
 			/>
-			<Select>
+			<Select name="role">
 				<option value={ROLES.teacher}>{ROLES.teacher}</option>
 				<option value={ROLES.student}>{ROLES.student}</option>
 				<option value={ROLES.other}>{ROLES.other}</option>
 			</Select>
-			<InputCheckbox text="¿activo?" />
-			<Btn className={css.btnCreate} disabled>
+			<InputCheckbox name="active" text="¿activo?" />
+			<Btn className={css.btnCreate} disabled={!isValidForm}>
 				crear usuario
 			</Btn>
-			<BtnIcon
-				className={css.cross}
-				type="button"
-				icon={Cross}
-				kind={BTN__ICON_KIND.fillBlack}
-				onClick={setFilterForm}
-			/>
 		</form>
 	);
 }
