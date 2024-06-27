@@ -24,3 +24,7 @@
 .btnCreate {
 	justify-self: end;
 }
+
+.submitErr {
+	color: var(--c-red);
+}

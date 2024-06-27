@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BTN__ICON_KIND } from "../../constants/btnIconKind.js";
 import { ROLES } from "../../constants/roles.js";
 import { createUser } from "../../fetch/createUser.js";
@@ -15,6 +16,8 @@ export default function UserCreationForm({ setFilterForm }) {
 	const { name, username, setName, setUsername, isValidForm } =
 		useCreateUserForm();
 
+	const [submitUser, setSubmitUser] = useState({ err: "", loading: false });
+
 	const handleSubmit = async e => {
 		e.preventDefault();
 
@@ -24,11 +27,13 @@ export default function UserCreationForm({ setFilterForm }) {
 			role: e.target.role.value,
 			state: e.target.active.checked
 		};
+
 		try {
+			setSubmitUser({ loading: true, err: "" });
 			await createUser({ body: newUser });
-			console.log("usuario creado");
+			setFilterForm();
 		} catch (error) {
-			console.log(error);
+			setSubmitUser({ loading: false, err: "error al crear usuario 😢" });
 		}
 	};
 
@@ -65,9 +70,13 @@ export default function UserCreationForm({ setFilterForm }) {
 				<option value={ROLES.other}>{ROLES.other}</option>
 			</Select>
 			<InputCheckbox name="active" text="¿activo?" />
-			<Btn className={css.btnCreate} disabled={!isValidForm}>
-				crear usuario
+			<Btn
+				className={css.btnCreate}
+				disabled={!isValidForm || submitUser.loading}
+			>
+				{submitUser.loading ? "creando..." : "crear usuario"}
 			</Btn>
+			{submitUser.err && <p className={css.submitErr}>{submitUser.err}</p>}
 		</form>
 	);
 }

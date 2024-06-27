@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { URL_USERS } from "../constants/urls.js";
+import { isValidUsernameBasedOnDb } from "../fetch/isValidUsernameBasedOnDb.js";
 import { nameSchema } from "../zod-schemas/nameSchema.js";
 import { usernameSchema } from "../zod-schemas/usernameSchema.js";
 
+const initialState = {
+	name: { value: "", err: "" },
+	username: { value: "", err: "", loading: false }
+};
+
 export const useCreateUserForm = () => {
-	const [createUserForm, setCreateUserForm] = useState({
-		name: { value: "", err: "" },
-		username: { value: "", err: "", loading: false }
-	});
+	const [createUserForm, setCreateUserForm] = useState(initialState);
 	const form = createUserForm;
 
 	const isValidForm =
@@ -76,12 +78,17 @@ export const useCreateUserForm = () => {
 		setCreateUserForm(newForm);
 	};
 
+	const resetCreateUserForm = () => {
+		setCreateUserForm(initialState);
+	};
+
 	return {
 		name: form.name,
 		username: form.username,
 		setName,
 		setUsername,
-		isValidForm
+		isValidForm,
+		resetCreateUserForm
 	};
 };
 
@@ -95,12 +102,6 @@ const setInvalidOrValidUsernameBasedOnDb = async params => {
 		if (error.name === "AbortError") return;
 		setErrorServer({ setCreateUserForm });
 	}
-};
-
-const isValidUsernameBasedOnDb = async ({ username, signal }) => {
-	const res = await fetch(`${URL_USERS}?username=${username}`, { signal });
-	const { users } = await res.json();
-	return users.length ? false : true;
 };
 
 const setInvalidUsername = ({ setCreateUserForm }) => {
