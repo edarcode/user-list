@@ -11,15 +11,14 @@ export const useCreateUserForm = () => {
 	const form = createUserForm;
 
 	useEffect(() => {
-		const username = form.username;
-		if (!username.loading || username.err) return;
+		if (!form.username.loading) return;
 
 		const controller = new AbortController();
 
 		const timeoutId = setTimeout(() => {
 			setInvalidOrValidUsernameBasedOnDb({
 				signal: controller.signal,
-				username: username.value,
+				username: form.username.value,
 				setCreateUserForm
 			});
 		}, 500);
@@ -28,7 +27,7 @@ export const useCreateUserForm = () => {
 			clearTimeout(timeoutId);
 			controller.abort();
 		};
-	}, [form.username]);
+	}, [form.username.loading, form.username.value]);
 
 	const setName = newName => {
 		const { success, error } = nameSchema.safeParse(newName);
