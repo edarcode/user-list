@@ -29,6 +29,8 @@ export default function UserCreationForm({ setFilterForm }) {
 				placeholder="@edarcode..."
 				value={username.value}
 				err={username.err}
+				loading={username.loading}
+				success={!username.loading && !username.err && username.value}
 				onChange={e => setUsername(e.target.value)}
 			/>
 			<Select>
