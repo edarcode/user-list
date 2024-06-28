@@ -1,2 +1,22 @@
-# 1-template
-template utilizando vite, react, está config eslint y prettier
+# herramientas utilizadas
+
+- vite
+- eslint
+- prettier
+- react
+- zustand
+- zod
+
+# emotes
+
+😂😭😁😐😥😮😱😎😇😬🤑😤
+💪👍
+🎵
+✔✘
+💣
+☕🔥📧📫📞☎🍻🔔🔍📌📐📆📚🚀👀🚫
+©
+💰💵💳
+⏰⏳⏲🔞
+❝❞
+🌞👽💤
