@@ -1,6 +1,6 @@
 .user {
 	display: grid;
-	grid-template-columns: 1fr 20% 20% 20%;
+	grid-template-columns: 1fr 20% 20% auto auto;
 	gap: 10px;
 	align-items: center;
 	box-shadow: var(--s-sm);
@@ -11,4 +11,8 @@
 
 .name {
 	text-transform: capitalize;
+}
+
+.delete {
+	color: var(--c-red);
 }
