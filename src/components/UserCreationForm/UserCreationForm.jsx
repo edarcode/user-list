@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BTN__ICON_KIND } from "../../constants/btnIconKind.js";
 import { ROLES } from "../../constants/roles.js";
 import { createUser } from "../../fetch/createUser.js";
 import { useCreateUserForm } from "../../hooks/useCreateUserForm.jsx";
+import { useUsers } from "../../stores/users/useUsers.jsx";
 import Btn from "../buttons/Btn/Btn.jsx";
 import BtnIcon from "../buttons/BtnIcon/BtnIcon.jsx";
 import InputCheckbox from "../forms/InputCheckbox/InputCheckbox.jsx";
@@ -15,8 +16,31 @@ import css from "./css.module.css";
 export default function UserCreationForm({ setFilterForm }) {
 	const { name, username, setName, setUsername, isValidForm } =
 		useCreateUserForm();
+	const resetFilters = useUsers(state => state.resetFilters);
+	const getUsers = useUsers(state => state.getUsers);
 
-	const [submitUser, setSubmitUser] = useState({ err: "", loading: false });
+	const [submitUser, setSubmitUser] = useState({
+		err: "",
+		loading: false,
+		newUser: {}
+	});
+
+	useEffect(() => {
+		if (!submitUser.loading) return;
+
+		const controller = new AbortController();
+		createUser({ body: submitUser.newUser, signal: controller.signal })
+			.then(() => {
+				resetFilters();
+				setFilterForm();
+				getUsers();
+			})
+			.catch(() => {
+				setSubmitUser({ loading: false, err: "error al crear usuario 😢" });
+			});
+
+		return () => controller.abort();
+	}, [submitUser, resetFilters, setFilterForm, getUsers]);
 
 	const handleSubmit = async e => {
 		e.preventDefault();
@@ -27,14 +51,7 @@ export default function UserCreationForm({ setFilterForm }) {
 			role: e.target.role.value,
 			state: e.target.active.checked
 		};
-
-		try {
-			setSubmitUser({ loading: true, err: "" });
-			await createUser({ body: newUser });
-			setFilterForm();
-		} catch (error) {
-			setSubmitUser({ loading: false, err: "error al crear usuario 😢" });
-		}
+		setSubmitUser({ loading: true, err: "", newUser });
 	};
 
 	return (

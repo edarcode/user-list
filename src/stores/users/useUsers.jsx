@@ -6,6 +6,7 @@ import { changeSortBy } from "./changeSortBy.js";
 import { changeUserToSearch } from "./changeUserToSearch.js";
 import { changeUsersPerPage } from "./changeUsersPerPage.js";
 import { getUsers } from "./getUsers.js";
+import { resetFilters } from "./resetFilters.js";
 
 const initialStateUsers = {
 	allUsers: [],
@@ -36,6 +37,8 @@ export const useUsers = create(
 		changeSortBy: newSortBy => changeSortBy({ set, newSortBy }),
 
 		changeUsersPerPage: newUsersPerPage =>
-			changeUsersPerPage({ set, newUsersPerPage })
+			changeUsersPerPage({ set, newUsersPerPage }),
+
+		resetFilters: () => resetFilters({ set, initialStateUsers })
 	}))
 );
