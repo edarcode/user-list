@@ -50,6 +50,12 @@ export default function UserEditForm({ user }) {
 				value={username.value}
 				err={username.err}
 				loading={username.loading}
+				success={
+					!username.loading &&
+					!username.err &&
+					username.value &&
+					username.value !== user.username
+				}
 				onChange={e => setUsername(e.target.value)}
 			/>
 			<Select value={role} onChange={e => setRole(e.target.value)}>
