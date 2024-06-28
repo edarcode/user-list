@@ -21,24 +21,27 @@ const initialStateUsers = {
 };
 
 export const useUsers = create(
-	devtools((set, get) => ({
-		...initialStateUsers,
+	devtools(
+		(set, get) => ({
+			...initialStateUsers,
 
-		getUsers: ({ signal } = {}) => getUsers({ set, get, signal }),
+			getUsers: ({ signal } = {}) => getUsers({ set, get, signal }),
 
-		changePageUsers: newPage => changePageUsers({ set, newPage }),
+			changePageUsers: newPage => changePageUsers({ set, newPage }),
 
-		changeUserToSearch: newUserToSearch =>
-			changeUserToSearch({ set, newUserToSearch }),
+			changeUserToSearch: newUserToSearch =>
+				changeUserToSearch({ set, newUserToSearch }),
 
-		changeIsChekedActive: newIsCheckedActive =>
-			changeIsChekedActive({ set, newIsCheckedActive }),
+			changeIsChekedActive: newIsCheckedActive =>
+				changeIsChekedActive({ set, newIsCheckedActive }),
 
-		changeSortBy: newSortBy => changeSortBy({ set, newSortBy }),
+			changeSortBy: newSortBy => changeSortBy({ set, newSortBy }),
 
-		changeUsersPerPage: newUsersPerPage =>
-			changeUsersPerPage({ set, newUsersPerPage }),
+			changeUsersPerPage: newUsersPerPage =>
+				changeUsersPerPage({ set, newUsersPerPage }),
 
-		resetFilters: () => resetFilters({ set, initialStateUsers })
-	}))
+			resetFilters: () => resetFilters({ set, initialStateUsers })
+		}),
+		{ name: "useUsers" }
+	)
 );

@@ -3,6 +3,7 @@ import { BTN__ICON_KIND } from "../../constants/btnIconKind.js";
 import { ROLES } from "../../constants/roles.js";
 import { createUser } from "../../fetch/createUser.js";
 import { useCreateUserForm } from "../../hooks/useCreateUserForm.jsx";
+import { useCurrentUserForm } from "../../stores/current-user-form/useCurrentUserForm.jsx";
 import { useUsers } from "../../stores/users/useUsers.jsx";
 import Btn from "../buttons/Btn/Btn.jsx";
 import BtnIcon from "../buttons/BtnIcon/BtnIcon.jsx";
@@ -13,11 +14,12 @@ import Select from "../forms/Select/Select.jsx";
 import Cross from "../icons/Cross.jsx";
 import css from "./css.module.css";
 
-export default function UserCreationForm({ setFilterForm }) {
+export default function UserCreationForm() {
 	const { name, username, setName, setUsername, isValidForm } =
 		useCreateUserForm();
 	const resetFilters = useUsers(state => state.resetFilters);
 	const getUsers = useUsers(state => state.getUsers);
+	const setFormToFilter = useCurrentUserForm(state => state.setFormToFilter);
 
 	const [submitUser, setSubmitUser] = useState({
 		err: "",
@@ -32,7 +34,7 @@ export default function UserCreationForm({ setFilterForm }) {
 		createUser({ body: submitUser.newUser, signal: controller.signal })
 			.then(() => {
 				resetFilters();
-				setFilterForm();
+				setFormToFilter();
 				getUsers();
 			})
 			.catch(() => {
@@ -40,7 +42,7 @@ export default function UserCreationForm({ setFilterForm }) {
 			});
 
 		return () => controller.abort();
-	}, [submitUser, resetFilters, setFilterForm, getUsers]);
+	}, [submitUser, resetFilters, setFormToFilter, getUsers]);
 
 	const handleSubmit = async e => {
 		e.preventDefault();
@@ -61,7 +63,7 @@ export default function UserCreationForm({ setFilterForm }) {
 				type="button"
 				icon={Cross}
 				kind={BTN__ICON_KIND.fillBlack}
-				onClick={setFilterForm}
+				onClick={setFormToFilter}
 			/>
 			<InputText
 				className={css.name}

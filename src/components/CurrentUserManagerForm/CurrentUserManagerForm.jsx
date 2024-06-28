@@ -1,15 +1,16 @@
-import { FORM_TYPES } from "../../constants/formTypes.js";
-import { useCurrentForm } from "../../hooks/useCurrentForm.jsx";
+import { USERFORM_TYPES } from "../../constants/userformTypes.js";
+import { useCurrentUserForm } from "../../stores/current-user-form/useCurrentUserForm.jsx";
 import UserCreationForm from "../UserCreationForm/UserCreationForm.jsx";
 import UserListFilterForm from "../UserListFilterForm/UserListFilterForm.jsx";
 
 export default function CurrentUserManagerForm() {
-	const { currentForm, setCreateForm, setFilterForm } = useCurrentForm();
+	const nameCurrentForm = useCurrentUserForm(state => state.name);
 
-	if (currentForm === FORM_TYPES.filter)
-		return <UserListFilterForm setCreateForm={setCreateForm} />;
-	if (currentForm === FORM_TYPES.create)
-		return <UserCreationForm setFilterForm={setFilterForm} />;
+	const FINAL_RENDER = {
+		[USERFORM_TYPES.filter]: <UserListFilterForm />,
+		[USERFORM_TYPES.create]: <UserCreationForm />,
+		default: null
+	};
 
-	return null;
+	return FINAL_RENDER[nameCurrentForm];
 }
