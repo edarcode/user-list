@@ -1,0 +1,26 @@
+.form {
+	position: relative;
+	box-shadow: var(--s-sm);
+	border-radius: var(--r-md);
+	padding: var(--p-lg);
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	justify-items: start;
+	align-items: start;
+	gap: var(--g-lg);
+}
+
+.username {
+	grid-column: 3/4;
+}
+
+.cross {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(50%, -50%);
+}
+
+.btnEdit {
+	justify-self: end;
+}

@@ -1,10 +1,11 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { USERFORM_TYPES } from "../../constants/userformTypes.js";
+import { setFormToEdit } from "./setFormToEdit.js";
 
 const initialCurrentUserForm = {
 	name: USERFORM_TYPES.filter,
-	payload: {}
+	payload: null
 };
 
 export const useCurrentUserForm = create(
@@ -13,7 +14,8 @@ export const useCurrentUserForm = create(
 			...initialCurrentUserForm,
 
 			setFormToCreate: () => set({ name: USERFORM_TYPES.create }),
-			setFormToFilter: () => set({ name: USERFORM_TYPES.filter })
+			setFormToFilter: () => set({ name: USERFORM_TYPES.filter }),
+			setFormToEdit: user => setFormToEdit({ set, user })
 		}),
 		{ name: "useCurrentUserForm" }
 	)

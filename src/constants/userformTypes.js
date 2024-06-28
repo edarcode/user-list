@@ -1,6 +1,6 @@
 export const USERFORM_TYPES = {
-	filter: "filter and sorted",
+	filter: "filtered and sorted",
 	create: "creation",
-	edit: "updated",
-	delete: "deleted"
+	edit: "edit",
+	delete: "delete"
 };
