@@ -5,7 +5,7 @@ export const getUsers = async ({ set, get, signal }) => {
 	const url = `${URL_USERS}?page=${page}&take=${usersPerPage}`;
 	const newUrl = addQueries(url, { userToSearch, isCheckedActive, sortBy });
 
-	set({ loading: true });
+	set({ loading: true, err: "" });
 	try {
 		const res = await fetch(newUrl, { signal });
 		if (!res.ok) throw new Error(res.statusText);
