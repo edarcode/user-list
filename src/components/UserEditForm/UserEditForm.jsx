@@ -11,8 +11,9 @@ import Select from "../forms/Select/Select.jsx";
 import Cross from "../icons/Cross.jsx";
 import css from "./css.module.css";
 
-export default function UserEditForm() {
+export default function UserEditForm({ user }) {
 	const setFormToFilter = useCurrentUserForm(state => state.setFormToFilter);
+
 	const {
 		name,
 		username,
@@ -21,11 +22,12 @@ export default function UserEditForm() {
 		setName,
 		setRole,
 		setState,
-		setUsername
-	} = useUserEditForm();
+		setUsername,
+		isValidForm
+	} = useUserEditForm(user);
 
 	return (
-		<form className={css.form}>
+		<form className={css.form} key={user.id}>
 			<BtnIcon
 				className={css.cross}
 				type="button"
@@ -37,14 +39,17 @@ export default function UserEditForm() {
 				className={css.name}
 				title="nombre"
 				placeholder="edarcode..."
-				value={name}
+				value={name.value}
+				err={name.err}
 				onChange={e => setName(e.target.value)}
 			/>
 			<InputTextAsync
 				className={css.username}
 				title="username"
 				placeholder="@edarcode..."
-				value={username}
+				value={username.value}
+				err={username.err}
+				loading={username.loading}
 				onChange={e => setUsername(e.target.value)}
 			/>
 			<Select value={role} onChange={e => setRole(e.target.value)}>
@@ -58,7 +63,7 @@ export default function UserEditForm() {
 				checked={state}
 				onChange={e => setState(e.target.checked)}
 			/>
-			<Btn className={css.btnEdit} onClick={() => {}} disabled>
+			<Btn className={css.btnEdit} onClick={() => {}} disabled={!isValidForm}>
 				editar usuario
 			</Btn>
 		</form>
