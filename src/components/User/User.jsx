@@ -7,8 +7,9 @@ import Pencil from "../icons/Pencil.jsx";
 import Trash from "../icons/Trash.jsx";
 import css from "./css.module.css";
 
-const User = user => {
+export default function User(user) {
 	const setFormToEdit = useCurrentUserForm(state => state.setFormToEdit);
+	const setFormToDelete = useCurrentUserForm(state => state.setFormToDelete);
 	const { name, username, state, role } = user;
 
 	return (
@@ -21,9 +22,11 @@ const User = user => {
 				icon={Pencil}
 				onClick={() => setFormToEdit(user)}
 			/>
-			<BtnIcon className={css.delete} icon={Trash} />
+			<BtnIcon
+				className={css.delete}
+				icon={Trash}
+				onClick={() => setFormToDelete(user)}
+			/>
 		</article>
 	);
-};
-
-export default User;
+}

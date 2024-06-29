@@ -1,0 +1,30 @@
+.form {
+	position: relative;
+	box-shadow: var(--s-sm);
+	border-radius: var(--r-md);
+	padding: var(--p-lg);
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-items: start;
+	align-items: start;
+	gap: var(--g-lg);
+}
+
+.cross {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(50%, -50%);
+}
+
+.quote {
+	grid-column: span 2;
+}
+
+.btnDelete {
+	justify-self: end;
+}
+
+.submitErr {
+	color: var(--c-red);
+}
