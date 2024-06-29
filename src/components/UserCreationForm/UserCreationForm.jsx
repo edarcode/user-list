@@ -46,6 +46,7 @@ export default function UserCreationForm() {
 
 	const handleSubmit = async e => {
 		e.preventDefault();
+		if (!isValidForm) return;
 
 		const newUser = {
 			name: name.value,

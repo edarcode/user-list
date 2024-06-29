@@ -102,6 +102,7 @@ export const useUserEditForm = user => {
 	};
 
 	return {
+		id: form.id,
 		name: form.name,
 		username: form.username,
 		role: form.role,
