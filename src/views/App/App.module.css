@@ -1,15 +1,16 @@
 .app {
 	padding: 15px;
-	max-width: 750px;
 	display: grid;
 	gap: 20px;
-	margin: 0 auto;
+	width: 100%;
+	max-width: 750px;
 }
 
 .pagination {
 	display: flex;
 	gap: var(--g-md);
 }
+
 .pageSelector {
 	margin-left: auto;
 }

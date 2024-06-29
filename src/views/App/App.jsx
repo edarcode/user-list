@@ -9,7 +9,7 @@ export default function App() {
 	useGetUsers(null, true);
 
 	return (
-		<section className={css.app}>
+		<main className={css.app}>
 			<h1 className={css.title}>Gestor de usuarios</h1>
 			<CurrentUserManagerForm />
 			<UserList />
@@ -17,6 +17,6 @@ export default function App() {
 				<UserListPaginationForm />
 				<UserListPageSelectorForm className={css.pageSelector} />
 			</div>
-		</section>
+		</main>
 	);
 }
