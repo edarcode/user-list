@@ -3,6 +3,43 @@
 	gap: var(--g-lg);
 }
 
+.listUserGrid {
+	grid-template-columns: 1fr 1fr;
+}
+
+.viewMode {
+	position: relative;
+	justify-self: end;
+	display: flex;
+	gap: 5px;
+}
+
+.listUserGrid .viewMode {
+	grid-column: span 2;
+}
+
+.viewMode::after {
+	content: "";
+	width: 30px;
+	height: 1.5px;
+	background-color: var(--c-black);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.grid,
+.lines {
+	width: 30px;
+	color: var(--c-lightgray);
+}
+
+.linesActive,
+.gridActive {
+	color: var(--c-black);
+}
+
 .err {
 	color: var(--c-red);
 }

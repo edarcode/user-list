@@ -16,6 +16,16 @@
 	color: var(--c-red);
 }
 
+/* modificador de user "userGrid" _______________________*/
+
+.userGrid {
+	grid-template-columns: 1fr 1fr auto auto !important;
+}
+
+.userGrid .profile {
+	grid-column: span 4;
+}
+
 @media (min-width: 768px) {
 	.user {
 		grid-template-columns: 1fr 20% 20% auto auto;
