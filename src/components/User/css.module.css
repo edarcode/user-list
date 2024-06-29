@@ -1,18 +1,26 @@
 .user {
 	display: grid;
-	grid-template-columns: 1fr 20% 20% auto auto;
-	gap: 10px;
+	grid-template-columns: 1fr 1fr auto auto;
+	gap: 20px 10px;
 	align-items: center;
 	box-shadow: var(--s-sm);
 	padding: 15px;
-	margin-bottom: 15px;
 	border-radius: var(--r-md);
 }
 
-.name {
-	text-transform: capitalize;
+.profile {
+	grid-column: span 4;
 }
 
 .delete {
 	color: var(--c-red);
+}
+
+@media (min-width: 768px) {
+	.user {
+		grid-template-columns: 1fr 20% 20% auto auto;
+	}
+	.profile {
+		grid-column: initial;
+	}
 }

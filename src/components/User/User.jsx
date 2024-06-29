@@ -14,14 +14,10 @@ export default function User(user) {
 
 	return (
 		<article className={css.user}>
-			<UserProfile name={name} username={username} />
-			<UserState state={state} />
+			<UserProfile className={css.profile} name={name} username={username} />
 			<UserRole role={role} />
-			<BtnIcon
-				className={css.edit}
-				icon={Pencil}
-				onClick={() => setFormToEdit(user)}
-			/>
+			<UserState state={state} />
+			<BtnIcon icon={Pencil} onClick={() => setFormToEdit(user)} />
 			<BtnIcon
 				className={css.delete}
 				icon={Trash}
