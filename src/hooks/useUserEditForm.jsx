@@ -14,7 +14,7 @@ const getInitialState = user => {
 };
 
 export const useUserEditForm = user => {
-	const [editUserForm, setEditUserForm] = useState(getInitialState(user));
+	const [editUserForm, setEditUserForm] = useState(() => getInitialState(user));
 	const form = editUserForm;
 
 	const isUserChanged =
