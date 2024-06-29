@@ -11,7 +11,7 @@ import { resetFilters } from "./resetFilters.js";
 const initialStateUsers = {
 	allUsers: [],
 	page: 1,
-	usersPerPage: 6,
+	usersPerPage: 2,
 	totalPages: 1,
 	userToSearch: "",
 	isCheckedActive: false,
