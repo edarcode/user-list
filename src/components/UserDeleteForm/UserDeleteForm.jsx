@@ -37,7 +37,7 @@ export default function UserDeleteForm({ user }) {
 				calcelar
 			</Btn>
 			<Btn className={css.btnDelete} disabled={submitUser.loading}>
-				{submitUser.loading ? "eliminando..." : "eliminar usuario"}
+				{submitUser.loading ? "eliminando..." : "eliminar"}
 			</Btn>
 			{submitUser.err && <p className={css.submitErr}>{submitUser.err}</p>}
 		</form>
