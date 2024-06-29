@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
 import { BTN__ICON_KIND } from "../../constants/btnIconKind.js";
 import { ROLES } from "../../constants/roles.js";
 import { updateUser } from "../../fetch/updateUser.js";
+import { useSubmitUser } from "../../hooks/useSubmitUser.jsx";
 import { useUserEditForm } from "../../hooks/useUserEditForm.jsx";
 import { useCurrentUserForm } from "../../stores/current-user-form/useCurrentUserForm.jsx";
-import { useUsers } from "../../stores/users/useUsers.jsx";
 import Btn from "../buttons/Btn/Btn.jsx";
 import BtnIcon from "../buttons/BtnIcon/BtnIcon.jsx";
 import InputCheckbox from "../forms/InputCheckbox/InputCheckbox.jsx";
@@ -16,9 +15,6 @@ import css from "./css.module.css";
 
 export default function UserEditForm({ user }) {
 	const setFormToFilter = useCurrentUserForm(state => state.setFormToFilter);
-	const getUsers = useUsers(state => state.getUsers);
-	const resetFilters = useUsers(state => state.resetFilters);
-
 	const {
 		id,
 		name,
@@ -31,33 +27,7 @@ export default function UserEditForm({ user }) {
 		setUsername,
 		isValidForm
 	} = useUserEditForm(user);
-
-	const [submitUser, setSubmitUser] = useState({
-		err: "",
-		loading: false,
-		newUser: {}
-	});
-
-	useEffect(() => {
-		if (!submitUser.loading) return;
-
-		const controller = new AbortController();
-		updateUser({
-			body: submitUser.newUser,
-			signal: controller.signal,
-			userId: id
-		})
-			.then(() => {
-				resetFilters();
-				setFormToFilter();
-				getUsers();
-			})
-			.catch(() => {
-				setSubmitUser({ loading: false, err: "error al crear usuario 😢" });
-			});
-
-		return () => controller.abort();
-	}, [submitUser, id, resetFilters, setFormToFilter, getUsers]);
+	const { submitUser, setSubmitUser } = useSubmitUser(updateUser);
 
 	const handleSubmit = async e => {
 		e.preventDefault();
@@ -70,7 +40,7 @@ export default function UserEditForm({ user }) {
 			state
 		};
 
-		setSubmitUser({ loading: true, err: "", newUser });
+		setSubmitUser({ loading: true, err: "", newUser, userId: id });
 	};
 
 	return (
@@ -122,6 +92,7 @@ export default function UserEditForm({ user }) {
 			>
 				{submitUser.loading ? "editando..." : "editar usuario"}
 			</Btn>
+			{submitUser.err && <p className={css.submitErr}>{submitUser.err}</p>}
 		</form>
 	);
 }

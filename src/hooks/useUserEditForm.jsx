@@ -144,7 +144,7 @@ const setValidUsernameBasedOnDb = ({ setEditUserForm }) => {
 const setErrorServer = ({ setEditUserForm }) => {
 	setEditUserForm(form => ({
 		...form,
-		username: { ...form.username, err: "Error de servidor", loading: false }
+		username: { ...form.username, err: "error de servidor", loading: false }
 	}));
 };
 

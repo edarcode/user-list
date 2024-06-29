@@ -8,7 +8,7 @@ const initialState = {
 	username: { value: "", err: "", loading: false }
 };
 
-export const useCreateUserForm = () => {
+export const useUserCreateForm = () => {
 	const [createUserForm, setCreateUserForm] = useState(initialState);
 	const form = createUserForm;
 
