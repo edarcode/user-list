@@ -23,6 +23,8 @@ export const useUserEditForm = user => {
 		user.state !== form.state ||
 		user.role !== form.role;
 
+	const isUsernameDiff = user.username !== form.username.value;
+
 	const isValidForm =
 		form.name.value &&
 		!form.name.err &&
@@ -34,6 +36,10 @@ export const useUserEditForm = user => {
 	useEffect(() => {
 		if (!form.username.loading) return;
 		if (!isUserChanged) {
+			setUsernameLoading({ setEditUserForm, bol: false });
+			return;
+		}
+		if (!isUsernameDiff) {
 			setUsernameLoading({ setEditUserForm, bol: false });
 			return;
 		}
@@ -52,7 +58,12 @@ export const useUserEditForm = user => {
 			clearTimeout(timeoutId);
 			controller.abort();
 		};
-	}, [form.username.loading, form.username.value, isUserChanged]);
+	}, [
+		form.username.loading,
+		form.username.value,
+		isUserChanged,
+		isUsernameDiff
+	]);
 
 	const setName = newName => {
 		const { success, error } = nameSchema.safeParse(newName);

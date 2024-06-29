@@ -10,7 +10,7 @@ export const useSubmitUser = fetch => {
 	const [submitUser, setSubmitUser] = useState({
 		err: "",
 		loading: false,
-		newUser: {},
+		newUser: null,
 		userId: null
 	});
 

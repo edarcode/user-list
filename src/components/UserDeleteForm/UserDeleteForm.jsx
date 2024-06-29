@@ -31,10 +31,10 @@ export default function UserDeleteForm({ user }) {
 			/>
 
 			<p className={css.quote}>
-				¿Estás seguro de que quieres eliminar al usuario {user.name}?
+				¿estás seguro de que quieres eliminar a {user.name}?
 			</p>
-			<Btn kind={BTN_KIND.white} onClick={setFormToFilter}>
-				Calcelar
+			<Btn type="button" kind={BTN_KIND.white} onClick={setFormToFilter}>
+				calcelar
 			</Btn>
 			<Btn className={css.btnDelete} disabled={submitUser.loading}>
 				{submitUser.loading ? "eliminando..." : "eliminar usuario"}
