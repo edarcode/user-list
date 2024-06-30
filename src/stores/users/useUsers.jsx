@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { USERS_PER_PAGE } from "../../constants/init.js";
 import { changeIsChekedActive } from "./changeIsChekedActive.js";
 import { changePageUsers } from "./changePageUsers.js";
 import { changeSortBy } from "./changeSortBy.js";
@@ -11,7 +12,7 @@ import { resetFilters } from "./resetFilters.js";
 const initialStateUsers = {
 	allUsers: [],
 	page: 1,
-	usersPerPage: 2,
+	usersPerPage: USERS_PER_PAGE,
 	totalPages: 1,
 	userToSearch: "",
 	isCheckedActive: false,
