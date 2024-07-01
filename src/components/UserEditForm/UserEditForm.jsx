@@ -55,7 +55,7 @@ export default function UserEditForm({ user }) {
 			<InputText
 				className={css.name}
 				title="nombre"
-				placeholder="edarcode..."
+				placeholder="loraine..."
 				value={name.value}
 				err={name.err}
 				onChange={e => setName(e.target.value)}
