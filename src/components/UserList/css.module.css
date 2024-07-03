@@ -3,6 +3,21 @@
 	gap: var(--g-lg);
 }
 
+.loading {
+	min-height: 346px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loading_2 {
+	min-height: 188px;
+}
+
+.loading_6 {
+	min-height: 505px;
+}
+
 .listUserGrid {
 	grid-template-columns: 1fr 1fr;
 }

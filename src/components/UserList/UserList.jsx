@@ -9,9 +9,16 @@ const UserList = () => {
 	const allUsers = useUsers(users => users.allUsers);
 	const loading = useUsers(users => users.loading);
 	const err = useUsers(users => users.err);
+	const usersPerPage = useUsers(users => users.usersPerPage);
 	const [isUserGrid, setIsUserGrid] = useState(false);
+	const stylesLoading = {
+		4: css.loading,
+		2: css.loading_2,
+		6: css.loading_6
+	};
+	const finalClassLoading = stylesLoading[usersPerPage];
 
-	if (loading) return <p>Cargando usuarios...</p>;
+	if (loading) return <p className={finalClassLoading}>Cargando usuarios...</p>;
 	if (err) return <p className={css.err}>Err al cargar usuarios 😢</p>;
 	if (allUsers.length <= 0) return <p>No hay usuarios</p>;
 
