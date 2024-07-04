@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useGetUsers } from "../../hooks/useGetUsers.jsx";
 import { useUsers } from "../../stores/users/useUsers.jsx";
 import { addAllClassName } from "../../utils/addAllClassName.js";
 import User from "../User/User.jsx";
@@ -6,50 +7,41 @@ import Grid from "../icons/Grid.jsx";
 import Lines from "../icons/Lines.jsx";
 import css from "./css.module.css";
 const UserList = () => {
-	const allUsers = useUsers(users => users.allUsers);
+	useGetUsers();
+	const [isGrid, setIsGrid] = useState(false);
 	const loading = useUsers(users => users.loading);
 	const err = useUsers(users => users.err);
-	const usersPerPage = useUsers(users => users.usersPerPage);
-	const [isUserGrid, setIsUserGrid] = useState(false);
-	const stylesLoading = {
-		4: css.loading,
-		2: css.loading_2,
-		6: css.loading_6
-	};
-	const finalClassLoading = stylesLoading[usersPerPage];
+	const allUsers = useUsers(users => users.allUsers);
 
-	if (loading) return <p className={finalClassLoading}>Cargando usuarios...</p>;
+	if (loading) return <p>Cargando usuarios...</p>;
 	if (err) return <p className={css.err}>Err al cargar usuarios 😢</p>;
 	if (allUsers.length <= 0) return <p>No hay usuarios</p>;
 
-	const users = allUsers.map(user => (
-		<User key={user.id} isUserGrid={isUserGrid} {...user} />
-	));
-
 	const finalClassName = addAllClassName([
 		css.list,
-		isUserGrid && css.listUserGrid
+		isGrid && css.listUserGrid
 	]);
 	const finalClassNameGrid = addAllClassName([
 		css.grid,
-		isUserGrid && css.gridActive
+		isGrid && css.gridActive
 	]);
 
 	const finalClassNameLines = addAllClassName([
 		css.lines,
-		!isUserGrid && css.linesActive
+		!isGrid && css.linesActive
 	]);
+
+	const users = allUsers.map(user => (
+		<User key={user.id} isUserGrid={isGrid} {...user} />
+	));
 
 	return (
 		<section className={finalClassName}>
 			<div className={css.viewMode}>
-				<Grid
-					className={finalClassNameGrid}
-					onClick={() => setIsUserGrid(true)}
-				/>
+				<Grid className={finalClassNameGrid} onClick={() => setIsGrid(true)} />
 				<Lines
 					className={finalClassNameLines}
-					onClick={() => setIsUserGrid(false)}
+					onClick={() => setIsGrid(false)}
 				/>
 			</div>
 			{users}

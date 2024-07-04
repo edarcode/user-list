@@ -1,19 +1,24 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useUsers } from "../stores/users/useUsers.jsx";
 
-export const useGetUsers = (depen, canRunFirstRende) => {
+export const useGetUsers = () => {
 	const getUsers = useUsers(users => users.getUsers);
-	const isFirstRender = useRef(!canRunFirstRende ? true : false);
+	const page = useUsers(users => users.page);
+	const userToSearch = useUsers(users => users.userToSearch);
+	const usersPerPage = useUsers(users => users.usersPerPage);
+	const isCheckedActive = useUsers(users => users.isCheckedActive);
+	const sortBy = useUsers(users => users.sortBy);
 
 	useEffect(() => {
-		if (isFirstRender.current) {
-			isFirstRender.current = false;
-			return;
-		}
-
 		const controller = new AbortController();
-		getUsers({ signal: controller.signal });
 
-		return () => controller.abort();
-	}, [depen, getUsers]);
+		const timeoutId = setTimeout(() => {
+			getUsers({ signal: controller.signal });
+		}, 500);
+
+		return () => {
+			clearTimeout(timeoutId);
+			controller.abort();
+		};
+	}, [page, usersPerPage, userToSearch, isCheckedActive, sortBy, getUsers]);
 };

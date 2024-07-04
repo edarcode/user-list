@@ -8,7 +8,7 @@ import css from "./css.module.css";
 export default function UserListFilterForm() {
 	const setFormToCreate = useCurrentUserForm(state => state.setFormToCreate);
 	return (
-		<form className={css.form}>
+		<form className={css.form} onSubmit={e => e.preventDefault()}>
 			<SearchUserByName />
 			<SortUsersBy />
 			<SearchActiveUsers className={css.checkbox} />
