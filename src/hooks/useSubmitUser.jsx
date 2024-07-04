@@ -4,7 +4,6 @@ import { useUsers } from "../stores/users/useUsers.jsx";
 
 export const useSubmitUser = fetch => {
 	const getUsers = useUsers(state => state.getUsers);
-	const resetFilters = useUsers(state => state.resetFilters);
 	const setFormToFilter = useCurrentUserForm(state => state.setFormToFilter);
 
 	const [submitUser, setSubmitUser] = useState({
@@ -25,7 +24,6 @@ export const useSubmitUser = fetch => {
 		};
 		fetch(params)
 			.then(() => {
-				resetFilters();
 				setFormToFilter();
 				getUsers();
 			})
@@ -34,7 +32,7 @@ export const useSubmitUser = fetch => {
 			});
 
 		return () => controller.abort();
-	}, [submitUser, fetch, resetFilters, setFormToFilter, getUsers]);
+	}, [submitUser, fetch, setFormToFilter, getUsers]);
 
 	return { submitUser, setSubmitUser };
 };
