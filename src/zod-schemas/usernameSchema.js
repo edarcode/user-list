@@ -4,7 +4,7 @@ import { REGEX } from "../constants/regex.js";
 export const usernameSchema = z
 	.string()
 	.min(6, { message: "Min 6 dígitos" })
-	.max(20, { message: "Max 15 dígitos" })
+	.max(15, { message: "Max 15 dígitos" })
 	.refine(username => REGEX.onlyLettersAndNums.test(username), {
 		message: "Solo letras minúsculas y números"
 	})
