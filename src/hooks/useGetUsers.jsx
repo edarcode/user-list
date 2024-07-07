@@ -14,7 +14,7 @@ export const useGetUsers = () => {
 
 		const timeoutId = setTimeout(() => {
 			getUsers({ signal: controller.signal });
-		}, 500);
+		}, 300);
 
 		return () => {
 			clearTimeout(timeoutId);
